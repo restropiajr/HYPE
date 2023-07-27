@@ -30,7 +30,7 @@ export function NavBar() {
         </nav>
         <section className="navbar-side-menu">
           <div
-            className={`navbaroverlay bg-gray-500 bg-opacity-50 absolute inset-0 z-0 transition-transform duration-300 ease-in-out ${
+            className={`overlay bg-gray-500 bg-opacity-50 absolute inset-0 z-0 transition-transform duration-300 ease-in-out ${
               isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
             }`}
             onClick={() => setisSideMenuOpen(false)}></div>
@@ -54,16 +54,16 @@ export function NavBar() {
               <div className="row">
                 <div className="w-full flex justify-start">
                   <ul>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out hover:bg-red-500">
+                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
                       <Link to="catalog">PRODUCTS</Link>
                     </li>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out hover:bg-red-500">
+                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
                       <Link to="catalog">CONTACT</Link>
                     </li>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out hover:bg-red-500">
+                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
                       <Link to="catalog">SIGN UP</Link>
                     </li>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out hover:bg-red-500">
+                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
                       <Link to="catalog">LOGIN</Link>
                     </li>
                   </ul>
