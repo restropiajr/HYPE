@@ -30,12 +30,12 @@ export function NavBar() {
         </nav>
         <section className="navbar-side-menu">
           <div
-            className={`overlay bg-gray-500 bg-opacity-50 absolute inset-0 z-0 transition-transform duration-300 ease-in-out ${
+            className={`overlay bg-gray-500 bg-opacity-50 absolute inset-0 z-10 transition-transform duration-300 ease-in-out ${
               isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
             }`}
             onClick={() => setisSideMenuOpen(false)}></div>
           <div
-            className={`content w-10/12 bg-white ring-gray-600 absolute inset-0 z-10 transition-transform duration-300 ease-in-out ${
+            className={`content w-10/12 bg-white ring-gray-600 absolute inset-0 z-20 transition-transform duration-300 ease-in-out ${
               isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
             }`}>
             <div className="container">
