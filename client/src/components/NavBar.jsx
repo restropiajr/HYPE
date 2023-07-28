@@ -53,31 +53,41 @@ export function NavBar() {
             <div className="content-row flex">
               <div className="w-full flex justify-start">
                 <ul>
-                  <li
-                    onClick={() => closeSideMenu()}
-                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                    <Link to="/">HOME</Link>
-                  </li>
-                  <li
-                    onClick={() => closeSideMenu()}
-                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                    <Link to="/catalog">PRODUCTS</Link>
-                  </li>
-                  <li
-                    onClick={() => closeSideMenu()}
-                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                    <Link to="/contact">CONTACT</Link>
-                  </li>
-                  <li
-                    onClick={() => closeSideMenu()}
-                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                    <Link to="/signup">SIGN UP</Link>
-                  </li>
-                  <li
-                    onClick={() => closeSideMenu()}
-                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                    <Link to="/login">LOGIN</Link>
-                  </li>
+                  <Link to="/">
+                    <li
+                      onClick={() => closeSideMenu()}
+                      className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                      HOME
+                    </li>
+                  </Link>
+                  <Link to="/catalog">
+                    <li
+                      onClick={() => closeSideMenu()}
+                      className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                      PRODUCTS
+                    </li>
+                  </Link>
+                  <Link to="/contact">
+                    <li
+                      onClick={() => closeSideMenu()}
+                      className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                      CONTACT
+                    </li>
+                  </Link>
+                  <Link to="/signup">
+                    <li
+                      onClick={() => closeSideMenu()}
+                      className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                      SIGN UP
+                    </li>
+                  </Link>
+                  <Link to="/login">
+                    <li
+                      onClick={() => closeSideMenu()}
+                      className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                      LOGIN
+                    </li>
+                  </Link>
                 </ul>
               </div>
             </div>
