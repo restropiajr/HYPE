@@ -15,7 +15,7 @@ export function RotatingBanner({ images }) {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="rotatingbanner-container flex flex-col md:w-1/2 m-auto justify-center items-center relative group mb-16">
+    <div className="rotatingbanner-container w-full flex flex-col m-auto justify-center items-center relative group mb-8 md:mb-16">
       <Banner image={images[currentIndex]} />
       <PrevButton
         onPrev={() =>
@@ -51,7 +51,7 @@ function Indicators({ count, currentIndex, onSelect }) {
           key={index}
           type="button"
           onClick={() => onSelect(index)}
-          className="m-1">
+          className="m-2">
           {index === currentIndex ? (
             <BsCircleFill size={10} color="red" />
           ) : (

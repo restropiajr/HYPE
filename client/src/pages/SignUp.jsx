@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export function SignUp() {
   return (
     <>
-      <div className="signup-container flex flex-col items-center mt-36">
+      <div className="signup-container flex flex-col items-center mt-24">
         <h2 className="text-3xl">SIGN UP</h2>
         <br />
         <form>
@@ -40,7 +40,7 @@ export function SignUp() {
             REGISTER
           </button>
         </form>
-        <p className="text-lg">
+        <p className="text-xl">
           Already have an account?{' '}
           <Link to="/login" className="underline">
             Log in

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export function Login() {
   return (
     <>
-      <div className="login-container flex flex-col items-center mt-36">
+      <div className="login-container flex flex-col items-center mt-24">
         <h2 className="text-3xl">LOG IN</h2>
         <br />
         <form>
@@ -31,7 +31,7 @@ export function Login() {
             LOG IN
           </button>
         </form>
-        <p className="text-lg">
+        <p className="text-xl">
           Don't have an account?{' '}
           <Link to="/signup" className="underline">
             Sign up

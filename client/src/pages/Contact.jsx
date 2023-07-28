@@ -1,7 +1,7 @@
 export function Contact() {
   return (
     <>
-      <div className="contact-container flex flex-col justify-center items-center mt-36">
+      <div className="contact-container flex flex-col justify-center items-center mt-24">
         <h2 className="text-3xl">CONTACT US</h2>
         <br />
         <h3 className="text-2xl mb-2">STORE ADDRESS:</h3>

@@ -24,7 +24,7 @@ export function NavBar() {
               <FaBars size={30} color="black" />
             </div>
             <Link to="/">
-              <h1 className="text-5xl md:text-7xl m-4 cursor-pointer">HYPE</h1>
+              <h1 className="text-5xl m-4 cursor-pointer">HYPE</h1>
             </Link>
             <Link to="/mycart">
               <div className="m-4">
