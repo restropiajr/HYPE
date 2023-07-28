@@ -19,16 +19,16 @@ export function NavBar() {
     <>
       <nav className="navbar-container w-full">
         <div className="navbar-row flex">
-          <div className="w-full flex justify-between fixed top-0 left-0 z-10 bg-white">
+          <div className="w-full flex justify-between fixed top-0 left-0 z-10 bg-white items-center">
             <div className="m-4 cursor-pointer" onClick={() => openSideMenu()}>
-              <FaBars size={25} color="black" />
+              <FaBars size={30} color="black" />
             </div>
             <Link to="/">
-              <h1 className="text-4xl m-4 cursor-pointer">HYPE</h1>
+              <h1 className="text-5xl m-4 cursor-pointer">HYPE</h1>
             </Link>
             <Link to="/mycart">
               <div className="m-4">
-                <FaCartShopping size={25} color="black" />
+                <FaCartShopping size={30} color="black" />
               </div>
             </Link>
           </div>
@@ -47,7 +47,7 @@ export function NavBar() {
             }`}>
             <div className="content-row flex">
               <div className="w-full flex justify-center">
-                <h1 className="text-4xl m-4">MENU</h1>
+                <h2 className="text-3xl m-4">MENU</h2>
               </div>
             </div>
             <div className="content-row flex">

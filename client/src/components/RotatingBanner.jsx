@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { BsCircleFill } from 'react-icons/bs';
-import { BsCircle } from 'react-icons/bs';
 import { FaAngleRight } from 'react-icons/fa6';
 import { FaAngleLeft } from 'react-icons/fa6';
 
@@ -16,34 +15,28 @@ export function RotatingBanner({ images }) {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="w-full">
-      <div className="row flex">
-        <div className="md:w-1/2 m-auto flex flex-col justify-center items-center relative group mt-36 mb-16">
-          <Banner image={images[currentIndex]} />
-          <PrevButton
-            onPrev={() =>
-              setCurrentIndex(
-                (currentIndex - 1 + images.length) % images.length
-              )
-            }
-          />
-          <Indicators
-            count={images.length}
-            currentIndex={currentIndex}
-            onSelect={(index) => setCurrentIndex(index)}
-          />
-          <NextButton
-            onNext={() => setCurrentIndex((currentIndex + 1) % images.length)}
-          />
-        </div>
-      </div>
+    <div className="rotatingbanner-container w-5/6 flex flex-col m-auto justify-center items-center mt-24 mb-8 md:mb-16">
+      <Banner image={images[currentIndex]} />
+      <PrevButton
+        onPrev={() =>
+          setCurrentIndex((currentIndex - 1 + images.length) % images.length)
+        }
+      />
+      <NextButton
+        onNext={() => setCurrentIndex((currentIndex + 1) % images.length)}
+      />
+      <Indicators
+        count={images.length}
+        currentIndex={currentIndex}
+        onSelect={(index) => setCurrentIndex(index)}
+      />
     </div>
   );
 }
 
 function Banner({ image }) {
   return (
-    <div className="img-wrapper z-0">
+    <div className="img-wrapper z-0 relative">
       <img className="w-full" src={image.src} alt={image.alt} />
     </div>
   );
@@ -58,25 +51,29 @@ function Indicators({ count, currentIndex, onSelect }) {
           key={index}
           type="button"
           onClick={() => onSelect(index)}
-          className="m-1">
+          className="mx-1">
           {index === currentIndex ? (
-            <BsCircleFill size={10} />
+            <BsCircleFill size={10} color="red" />
           ) : (
-            <BsCircle size={10} />
+            <BsCircleFill size={10} color="black" />
           )}
         </button>
       );
     }
     return indicators;
   }
-  return <div className="flex">{renderIndicator()}</div>;
+  return (
+    <div className="flex absolute bottom-[1%] right-auto">
+      {renderIndicator()}
+    </div>
+  );
 }
 
 function NextButton({ onNext }) {
   return (
     <button
       onClick={() => onNext()}
-      className="md:hidden md:group-hover:block absolute top-[42.5%] right-[2%]">
+      className="absolute top-[42.5%] right-[1%] md:right-[3.5%]">
       <FaAngleRight size={25} color="red" />
     </button>
   );
@@ -86,7 +83,7 @@ function PrevButton({ onPrev }) {
   return (
     <button
       onClick={() => onPrev()}
-      className="md:hidden md:group-hover:block absolute top-[42.5%] left-[2%]">
+      className="absolute top-[42.5%] left-[1%] md:left-[3.5%]">
       <FaAngleLeft size={25} color="red" />
     </button>
   );

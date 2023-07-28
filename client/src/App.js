@@ -1,13 +1,13 @@
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { NavBar, Footer } from './components';
 import { Home, Contact, SignUp, Login } from './pages';
+import './App.css';
 
 export default function App() {
   return (
-    <>
+    <div className="app-container flex flex-col min-h-screen">
       <NavBar />
-      <div className="flex flex-col justify-evenly min-h-screen">
+      <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="contact" element={<Contact />} />
@@ -20,6 +20,6 @@ export default function App() {
         </Routes>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
