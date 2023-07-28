@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { BsCircleFill } from 'react-icons/bs';
-import { BsCircle } from 'react-icons/bs';
 import { FaAngleRight } from 'react-icons/fa6';
 import { FaAngleLeft } from 'react-icons/fa6';
 
@@ -16,27 +15,21 @@ export function RotatingBanner({ images }) {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="w-full">
-      <div className="row flex">
-        <div className="md:w-1/2 m-auto flex flex-col justify-center items-center relative group mt-36 mb-16">
-          <Banner image={images[currentIndex]} />
-          <PrevButton
-            onPrev={() =>
-              setCurrentIndex(
-                (currentIndex - 1 + images.length) % images.length
-              )
-            }
-          />
-          <Indicators
-            count={images.length}
-            currentIndex={currentIndex}
-            onSelect={(index) => setCurrentIndex(index)}
-          />
-          <NextButton
-            onNext={() => setCurrentIndex((currentIndex + 1) % images.length)}
-          />
-        </div>
-      </div>
+    <div className="rotatingbanner-container flex flex-col md:w-1/2 m-auto justify-center items-center relative group mb-16">
+      <Banner image={images[currentIndex]} />
+      <PrevButton
+        onPrev={() =>
+          setCurrentIndex((currentIndex - 1 + images.length) % images.length)
+        }
+      />
+      <Indicators
+        count={images.length}
+        currentIndex={currentIndex}
+        onSelect={(index) => setCurrentIndex(index)}
+      />
+      <NextButton
+        onNext={() => setCurrentIndex((currentIndex + 1) % images.length)}
+      />
     </div>
   );
 }
@@ -60,9 +53,9 @@ function Indicators({ count, currentIndex, onSelect }) {
           onClick={() => onSelect(index)}
           className="m-1">
           {index === currentIndex ? (
-            <BsCircleFill size={10} />
+            <BsCircleFill size={10} color="red" />
           ) : (
-            <BsCircle size={10} />
+            <BsCircleFill size={10} color="black" />
           )}
         </button>
       );

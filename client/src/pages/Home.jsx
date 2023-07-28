@@ -28,22 +28,32 @@ export function Home() {
   return (
     <>
       <div className="home-container w-full">
+        <h2 className="text-3xl md:text-5xl mt-36 mb-16 text-center">
+          FEATURED STREETWEAR BRANDS
+        </h2>
         <RotatingBanner images={images} />
-        <div className="home-row flex">
-          <div className="w-full flex flex-col justify-center items-center">
-            <div className="img-wrapper md:w-1/2">
-              <img
-                className="w-full"
-                src="/images/waverunners.jpg"
-                alt="waverunners"
-              />
-            </div>
-            <Link to="catalog">
-              <h2 className="text-3xl mt-6 text-center cursor-pointer mb-14 p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                SHOP NOW
-              </h2>
-            </Link>
+        <div className="w-full flex justify-evenly items-center">
+          <div className="img-wrapper w-2/5">
+            <img
+              className="w-full"
+              src="/images/waverunners.jpg"
+              alt="waverunners"
+            />
           </div>
+          <div className="img-wrapper w-2/5">
+            <img
+              className="w-full"
+              src="/images/turtledoves.jpg"
+              alt="turtledoves"
+            />
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <Link to="/catalog">
+            <h2 className="text-3xl md:text-5xl mt-6 text-center cursor-pointer mb-14 p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+              SHOP NOW
+            </h2>
+          </Link>
         </div>
       </div>
     </>

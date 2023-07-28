@@ -6,8 +6,8 @@ export function Footer() {
       <footer className="footer-container w-full">
         <div className="footer-row flex">
           <div className="w-full flex justify-center bg-black">
-            <div className="flex flex-col">
-              <h2 className="text-white text-center m-2">FOLLOW US</h2>
+            <div className="flex flex-col items-center">
+              <h2 className="text-white text-center text-xl m-2">FOLLOW US</h2>
               <div className="flex justify-center">
                 <Link to="https://github.com/restropiajr/HYPE">
                   <div className="img-wrapper w-5 m-2">
@@ -24,7 +24,13 @@ export function Footer() {
                   </div>
                 </Link>
               </div>
-              <br />
+              <div className="img-wrapper w-24 m-2">
+                <img
+                  className="w-full"
+                  src="/images/hype-logo.png"
+                  alt="hype-logo"
+                />
+              </div>
               <p className="text-white text-xs text-center">
                 Copyright &copy; 2023 Roland Estropia Jr.
               </p>
