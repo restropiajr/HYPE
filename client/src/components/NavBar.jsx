@@ -47,7 +47,7 @@ export function NavBar() {
             }`}>
             <div className="content-row flex">
               <div className="w-full flex justify-center">
-                <h1 className="text-3xl m-4">MENU</h1>
+                <h1 className="text-4xl m-4">MENU</h1>
               </div>
             </div>
             <div className="content-row flex">
