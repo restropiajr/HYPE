@@ -10,15 +10,15 @@ export function RotatingBanner({ images }) {
   useEffect(() => {
     const timerId = setTimeout(() => {
       setCurrentIndex((currentIndex + 1) % images.length);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timerId);
   }, [currentIndex, images.length]);
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="w-full m-auto flex flex-col justify-center items-center relative group mt-10 mb-10">
+    <div className="w-full">
+      <div className="row flex">
+        <div className="md:w-1/2 m-auto flex flex-col justify-center items-center relative group mt-36 mb-16">
           <Banner image={images[currentIndex]} />
           <PrevButton
             onPrev={() =>
@@ -69,7 +69,6 @@ function Indicators({ count, currentIndex, onSelect }) {
     }
     return indicators;
   }
-
   return <div className="flex">{renderIndicator()}</div>;
 }
 
@@ -78,7 +77,7 @@ function NextButton({ onNext }) {
     <button
       onClick={() => onNext()}
       className="md:hidden md:group-hover:block absolute top-[42.5%] right-[2%]">
-      <FaAngleRight size={25} color="white" />
+      <FaAngleRight size={25} color="red" />
     </button>
   );
 }
@@ -88,7 +87,7 @@ function PrevButton({ onPrev }) {
     <button
       onClick={() => onPrev()}
       className="md:hidden md:group-hover:block absolute top-[42.5%] left-[2%]">
-      <FaAngleLeft size={25} color="white" />
+      <FaAngleLeft size={25} color="red" />
     </button>
   );
 }

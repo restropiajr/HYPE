@@ -1,79 +1,89 @@
-import { Link, Outlet } from 'react-router-dom';
-import { FaBars, FaCartShopping, FaXmark } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+import { FaBars, FaCartShopping } from 'react-icons/fa6';
 import { useState } from 'react';
-import './NavBar.css';
 
 export function NavBar() {
   const [isSideMenuOpen, setisSideMenuOpen] = useState(false);
 
+  function openSideMenu() {
+    setisSideMenuOpen(true);
+    document.documentElement.classList.add('overflow-hidden');
+  }
+
+  function closeSideMenu() {
+    setisSideMenuOpen(false);
+    document.documentElement.classList.remove('overflow-hidden');
+  }
+
   return (
     <>
-      <header>
-        <nav className="container">
-          <div className="row">
-            <div className="w-full flex justify-between border-b-4 border-black">
-              <div
-                className="m-4 cursor-pointer"
-                onClick={() => setisSideMenuOpen(true)}>
-                <FaBars size={25} color="black" />
-              </div>
-              <Link to="home">
-                <h1 className="text-4xl m-2 cursor-pointer">HYPE</h1>
-              </Link>
-              <Link to="mycart">
-                <div className="m-4">
-                  <FaCartShopping size={25} color="black" />
-                </div>
-              </Link>
+      <nav className="navbar-container w-full">
+        <div className="navbar-row flex">
+          <div className="w-full flex justify-between fixed top-0 left-0 z-10 bg-white">
+            <div className="m-4 cursor-pointer" onClick={() => openSideMenu()}>
+              <FaBars size={25} color="black" />
             </div>
+            <Link to="/">
+              <h1 className="text-4xl m-4 cursor-pointer">HYPE</h1>
+            </Link>
+            <Link to="/mycart">
+              <div className="m-4">
+                <FaCartShopping size={25} color="black" />
+              </div>
+            </Link>
           </div>
-        </nav>
-        <section className="navbar-side-menu">
+        </div>
+      </nav>
+      <section className="navbar-sidemenu-container">
+        <div className="navbar-sidemenu-row flex">
           <div
-            className={`overlay bg-gray-500 bg-opacity-50 absolute inset-0 z-10 transition-transform duration-300 ease-in-out ${
+            className={`overlay w-full fixed bg-gray-500 bg-opacity-50 inset-0 z-20 transition-transform duration-300 ease-in-out ${
               isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
             }`}
-            onClick={() => setisSideMenuOpen(false)}></div>
+            onClick={() => closeSideMenu()}></div>
           <div
-            className={`content w-10/12 bg-white ring-gray-600 absolute inset-0 z-20 transition-transform duration-300 ease-in-out ${
+            className={`content w-3/4 md:w-96 fixed bg-white ring-gray-600 inset-0 z-30 transition-transform duration-300 ease-in-out ${
               isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
             }`}>
-            <div className="container">
-              <div className="row">
-                <div className="w-full flex justify-start border-b-4 border-black">
-                  <div
-                    className="m-4 cursor-pointer"
-                    onClick={() => setisSideMenuOpen(false)}>
-                    <FaXmark size={25} color="black" />
-                  </div>
-                  <Link to="home" className="flex-grow flex justify-center">
-                    <h1 className="text-4xl m-2 cursor-pointer">HYPE</h1>
-                  </Link>
-                </div>
+            <div className="content-row flex">
+              <div className="w-full flex justify-center">
+                <h1 className="text-3xl m-4">MENU</h1>
               </div>
-              <div className="row">
-                <div className="w-full flex justify-start">
-                  <ul>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
-                      <Link to="catalog">PRODUCTS</Link>
-                    </li>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
-                      <Link to="catalog">CONTACT</Link>
-                    </li>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
-                      <Link to="catalog">SIGN UP</Link>
-                    </li>
-                    <li className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-500">
-                      <Link to="catalog">LOGIN</Link>
-                    </li>
-                  </ul>
-                </div>
+            </div>
+            <div className="content-row flex">
+              <div className="w-full flex justify-start">
+                <ul>
+                  <li
+                    onClick={() => closeSideMenu()}
+                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                    <Link to="/">HOME</Link>
+                  </li>
+                  <li
+                    onClick={() => closeSideMenu()}
+                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                    <Link to="/catalog">PRODUCTS</Link>
+                  </li>
+                  <li
+                    onClick={() => closeSideMenu()}
+                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                    <Link to="/contact">CONTACT</Link>
+                  </li>
+                  <li
+                    onClick={() => closeSideMenu()}
+                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                    <Link to="/signup">SIGN UP</Link>
+                  </li>
+                  <li
+                    onClick={() => closeSideMenu()}
+                    className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                    <Link to="/login">LOGIN</Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-        </section>
-      </header>
-      <Outlet />
+        </div>
+      </section>
     </>
   );
 }
