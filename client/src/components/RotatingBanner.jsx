@@ -15,20 +15,20 @@ export function RotatingBanner({ images }) {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="rotatingbanner-container w-full flex flex-col m-auto justify-center items-center relative group mb-8 md:mb-16">
+    <div className="rotatingbanner-container w-5/6 flex flex-col m-auto justify-center items-center mt-24 mb-8 md:mb-16">
       <Banner image={images[currentIndex]} />
       <PrevButton
         onPrev={() =>
           setCurrentIndex((currentIndex - 1 + images.length) % images.length)
         }
       />
+      <NextButton
+        onNext={() => setCurrentIndex((currentIndex + 1) % images.length)}
+      />
       <Indicators
         count={images.length}
         currentIndex={currentIndex}
         onSelect={(index) => setCurrentIndex(index)}
-      />
-      <NextButton
-        onNext={() => setCurrentIndex((currentIndex + 1) % images.length)}
       />
     </div>
   );
@@ -36,7 +36,7 @@ export function RotatingBanner({ images }) {
 
 function Banner({ image }) {
   return (
-    <div className="img-wrapper z-0">
+    <div className="img-wrapper z-0 relative">
       <img className="w-full" src={image.src} alt={image.alt} />
     </div>
   );
@@ -51,7 +51,7 @@ function Indicators({ count, currentIndex, onSelect }) {
           key={index}
           type="button"
           onClick={() => onSelect(index)}
-          className="m-2">
+          className="mx-1">
           {index === currentIndex ? (
             <BsCircleFill size={10} color="red" />
           ) : (
@@ -62,14 +62,18 @@ function Indicators({ count, currentIndex, onSelect }) {
     }
     return indicators;
   }
-  return <div className="flex">{renderIndicator()}</div>;
+  return (
+    <div className="flex absolute bottom-[1%] right-auto">
+      {renderIndicator()}
+    </div>
+  );
 }
 
 function NextButton({ onNext }) {
   return (
     <button
       onClick={() => onNext()}
-      className="md:hidden md:group-hover:block absolute top-[42.5%] right-[2%]">
+      className="absolute top-[42.5%] right-[1%] md:right-[3.5%]">
       <FaAngleRight size={25} color="red" />
     </button>
   );
@@ -79,7 +83,7 @@ function PrevButton({ onPrev }) {
   return (
     <button
       onClick={() => onPrev()}
-      className="md:hidden md:group-hover:block absolute top-[42.5%] left-[2%]">
+      className="absolute top-[42.5%] left-[1%] md:left-[3.5%]">
       <FaAngleLeft size={25} color="red" />
     </button>
   );
