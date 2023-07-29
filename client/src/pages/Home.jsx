@@ -51,7 +51,7 @@ export function Home() {
           </div>
         </div>
         <div className="flex justify-center">
-          <Link to="/catalog">
+          <Link to="/products">
             <h2 className="text-3xl text-center cursor-pointer mb-8 md:mb-16 p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
               SHOP NOW
             </h2>
