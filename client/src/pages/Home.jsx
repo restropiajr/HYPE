@@ -4,23 +4,18 @@ import { Link } from 'react-router-dom';
 const images = [
   {
     src: '/images/supreme-carousel.jpg',
-    alt: 'supreme',
   },
   {
     src: '/images/palace-carousel.png',
-    alt: 'palace',
   },
   {
     src: '/images/jordansupreme-carousel.jpg',
-    alt: 'jordan',
   },
   {
     src: '/images/stussy-carousel.png',
-    alt: 'stussy',
   },
   {
     src: '/images/mj-carousel.jpg',
-    alt: 'mj',
   },
 ];
 

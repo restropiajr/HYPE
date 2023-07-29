@@ -36,9 +36,9 @@ export function RotatingBanner({ images }) {
 
 function Banner({ image }) {
   return (
-    <div className="img-wrapper z-0 relative">
-      <img className="w-full" src={image.src} alt={image.alt} />
-    </div>
+    <div
+      style={{ backgroundImage: `url(${image.src})` }}
+      className="z-0 w-full h-[200px] md:h-[900px] bg-cover bg-center relative duration-500"></div>
   );
 }
 
