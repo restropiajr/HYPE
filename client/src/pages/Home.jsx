@@ -64,16 +64,16 @@ export function Home() {
             <h2 className="text-3xl mt-8 md:mt-16 text-center">ABOUT US</h2>
             <p className="w-full md:w-2/3 text-lg md:text-xl px-4 text-justify mt-4">
               Welcome to HYPE, the epicenter of streetwear greatness.
-              Established in December 2023 in San Diego, California, we're all
-              about bringing you the rarest and most exclusive footwear and
-              clothing. With locations across the globe, we curate a premium
-              collection that sets the standard in the streetwear world. Our
-              knowledgeable crew is here to provide you with an ideal shopping
-              experience, connecting you to the culture and helping you find
-              your perfect fit. From our in-house brand to over combined 50
-              years of industry expertise, we're the ultimate destination for
-              streetwear enthusiasts worldwide. Step into the hype and embrace
-              the lifestyle at HYPE!
+              Established in May 2023 in San Diego, California, we're all about
+              bringing you the rarest and most exclusive footwear and clothing.
+              With locations across the globe, we curate a premium collection
+              that sets the standard in the streetwear world. Our knowledgeable
+              crew is here to provide you with an ideal shopping experience,
+              connecting you to the culture and helping you find your perfect
+              fit. From our in-house brand to over combined 50 years of industry
+              expertise, we're the ultimate destination for streetwear
+              enthusiasts worldwide. Step into the hype and embrace the
+              lifestyle at HYPE!
             </p>
           </div>
         </div>
