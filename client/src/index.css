@@ -14,3 +14,35 @@
 ::-webkit-scrollbar-thumb {
   background-color: red;
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-family: Inter, sans-serif;
+  font-weight: 800;
+}
+
+h2,
+h3 {
+  font-family: Barlow, sans-serif;
+  font-weight: 700;
+}
+
+p,
+button {
+  font-family: Barlow, sans-serif;
+  font-weight: 400;
+}
+
+li {
+  font-family: Barlow, sans-serif;
+  font-weight: 700;
+}

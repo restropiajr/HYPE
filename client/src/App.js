@@ -1,11 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import { NavBar, Footer } from './components';
+import { NavBar, Footer, ScrollUpButton } from './components';
 import { Home, Contact, SignUp, Login } from './pages';
-import './App.css';
 
 export default function App() {
   return (
-    <div className="app-container flex flex-col min-h-screen">
+    <div className="app-container flex flex-col min-h-screen relative">
       <NavBar />
       <div className="flex-grow">
         <Routes>
@@ -20,6 +19,7 @@ export default function App() {
         </Routes>
       </div>
       <Footer />
+      <ScrollUpButton />
     </div>
   );
 }

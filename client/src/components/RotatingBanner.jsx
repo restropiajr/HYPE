@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BsCircleFill } from 'react-icons/bs';
-import { FaAngleRight } from 'react-icons/fa6';
-import { FaAngleLeft } from 'react-icons/fa6';
+import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6';
 
 export function RotatingBanner({ images }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,7 +14,7 @@ export function RotatingBanner({ images }) {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="rotatingbanner-container w-5/6 flex flex-col m-auto justify-center items-center mt-24 mb-8 md:mb-16">
+    <div className="col-one w-5/6 flex flex-col m-auto justify-center items-center mt-24 mb-8 md:mb-16">
       <Banner image={images[currentIndex]} />
       <PrevButton
         onPrev={() =>
@@ -73,8 +72,8 @@ function NextButton({ onNext }) {
   return (
     <button
       onClick={() => onNext()}
-      className="absolute top-[42.5%] right-[1%] md:right-[3.5%]">
-      <FaAngleRight size={25} color="red" />
+      className="absolute top-[42.5%] right-[1%] md:right-[3.5%] md:p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+      <FaAngleRight size={20} color="black" />
     </button>
   );
 }
@@ -83,8 +82,8 @@ function PrevButton({ onPrev }) {
   return (
     <button
       onClick={() => onPrev()}
-      className="absolute top-[42.5%] left-[1%] md:left-[3.5%]">
-      <FaAngleLeft size={25} color="red" />
+      className="absolute top-[42.5%] left-[1%] md:left-[3.5%] md:p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+      <FaAngleLeft size={20} color="black" />
     </button>
   );
 }

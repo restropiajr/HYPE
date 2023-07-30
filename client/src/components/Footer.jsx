@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 export function Footer() {
   return (
     <>
-      <footer className="footer-container w-full">
-        <div className="footer-row flex">
-          <div className="w-full flex justify-center bg-black">
+      <footer className="footer-container w-full bg-black">
+        <div className="row-one">
+          <div className="col-one w-full flex justify-center">
             <div className="flex flex-col items-center">
               <h2 className="text-white text-center text-xl m-2">FOLLOW US</h2>
               <div className="flex justify-center">
