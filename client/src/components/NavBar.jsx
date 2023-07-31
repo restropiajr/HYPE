@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FaBars, FaCartShopping } from 'react-icons/fa6';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AppContext } from '../lib/AppContext';
 
 export function NavBar() {
   const [isSideMenuOpen, setisSideMenuOpen] = useState(false);
+  const { user, handleSignOut } = useContext(AppContext);
 
   function openSideMenu() {
     setisSideMenuOpen(true);
@@ -13,6 +15,11 @@ export function NavBar() {
   function closeSideMenu() {
     setisSideMenuOpen(false);
     document.documentElement.classList.remove('overflow-hidden');
+  }
+
+  function handleLogout() {
+    closeSideMenu();
+    handleSignOut();
   }
 
   return (
@@ -73,20 +80,40 @@ export function NavBar() {
                         CONTACT
                       </li>
                     </Link>
-                    <Link to="/signup">
-                      <li
-                        onClick={() => closeSideMenu()}
-                        className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                        SIGN UP
-                      </li>
-                    </Link>
-                    <Link to="/login">
-                      <li
-                        onClick={() => closeSideMenu()}
-                        className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
-                        LOGIN
-                      </li>
-                    </Link>
+                    {!user ? (
+                      <Link to="/signup">
+                        <li
+                          onClick={() => closeSideMenu()}
+                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          SIGN UP
+                        </li>
+                      </Link>
+                    ) : (
+                      <Link to="/mycart">
+                        <li
+                          onClick={() => closeSideMenu()}
+                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          MY CART
+                        </li>
+                      </Link>
+                    )}
+                    {!user ? (
+                      <Link to="/login">
+                        <li
+                          onClick={() => closeSideMenu()}
+                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          LOGIN
+                        </li>
+                      </Link>
+                    ) : (
+                      <Link to="/">
+                        <li
+                          onClick={() => handleLogout()}
+                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          LOGOUT
+                        </li>
+                      </Link>
+                    )}
                   </ul>
                 </div>
               </div>

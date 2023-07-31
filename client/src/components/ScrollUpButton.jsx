@@ -12,9 +12,7 @@ export function ScrollUpButton() {
         setShowButton(false);
       }
     }
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
