@@ -5,7 +5,7 @@ import { ProductList } from '../components';
 
 export function Products() {
   const [products, setProducts] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const [sortByInput, setSortByInput] = useState();
   const [filterByInput, setFilterByInput] = useState();
