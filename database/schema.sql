@@ -42,6 +42,7 @@ CREATE TABLE "public"."cartedItems" (
 	"cartId" integer NOT NULL,
 	"productId" integer NOT NULL,
 	"quantity" integer NOT NULL,
+  "size" TEXT NOT NULL,
 	CONSTRAINT "cartedItems_pk" PRIMARY KEY ("cartedItemId")
 ) WITH (
   OIDS=FALSE
