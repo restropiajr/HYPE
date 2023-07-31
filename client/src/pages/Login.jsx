@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../lib/AppContext';
-import { LoginFetcher } from '../lib';
+import { loginFetcher } from '../lib';
 import { Circles } from 'react-loader-spinner';
 
 export function Login() {
@@ -18,7 +18,7 @@ export function Login() {
     event.preventDefault();
     try {
       setIsLoading(true);
-      const auth = await LoginFetcher(event);
+      const auth = await loginFetcher(event);
       handleLogin(auth);
     } catch (error) {
       alert(`Error logging in: ${error}`);

@@ -66,7 +66,7 @@ export function NavBar() {
                         HOME
                       </li>
                     </Link>
-                    <Link to="/catalog">
+                    <Link to="/products">
                       <li
                         onClick={() => closeSideMenu()}
                         className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
