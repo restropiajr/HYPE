@@ -26,12 +26,12 @@ export function NavBar() {
     <>
       <nav className="navbar-container w-full">
         <div className="row-one">
-          <div className="col-one w-full flex justify-between fixed top-0 left-0 z-10 bg-white items-center">
+          <div className="col-one fixed left-0 top-0 z-10 flex w-full items-center justify-between bg-white">
             <div className="m-4 cursor-pointer" onClick={() => openSideMenu()}>
               <FaBars size={30} color="black" />
             </div>
             <Link to="/">
-              <h1 className="text-5xl m-4 cursor-pointer">HYPE</h1>
+              <h1 className="m-4 cursor-pointer text-5xl">HYPE</h1>
             </Link>
             <Link to="/mycart">
               <div className="m-4">
@@ -43,40 +43,40 @@ export function NavBar() {
         <div className="row-two">
           <div className="col-one">
             <div
-              className={`overlay w-full fixed bg-gray-500 bg-opacity-50 inset-0 z-20 transition-transform duration-300 ease-in-out ${
+              className={`overlay fixed inset-0 z-20 w-full bg-gray-500 bg-opacity-50 transition-transform duration-300 ease-in-out ${
                 isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
               }`}
               onClick={() => closeSideMenu()}></div>
             <div
-              className={`content w-3/4 md:w-96 fixed bg-white ring-gray-600 inset-0 z-30 transition-transform duration-300 ease-in-out ${
+              className={`content fixed inset-0 z-30 w-3/4 bg-white ring-gray-600 transition-transform duration-300 ease-in-out md:w-96 ${
                 isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
               }`}>
               <div className="row-one">
-                <div className="col-one w-full flex justify-center">
-                  <h2 className="text-3xl m-4">MENU</h2>
+                <div className="col-one flex w-full justify-center">
+                  <h2 className="m-4 text-3xl">MENU</h2>
                 </div>
               </div>
               <div className="row-two">
-                <div className="w-full flex justify-start">
+                <div className="flex w-full justify-start">
                   <ul>
                     <Link to="/">
                       <li
                         onClick={() => closeSideMenu()}
-                        className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                        className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                         HOME
                       </li>
                     </Link>
                     <Link to="/catalog">
                       <li
                         onClick={() => closeSideMenu()}
-                        className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                        className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                         PRODUCTS
                       </li>
                     </Link>
                     <Link to="/contact">
                       <li
                         onClick={() => closeSideMenu()}
-                        className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                        className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                         CONTACT
                       </li>
                     </Link>
@@ -84,7 +84,7 @@ export function NavBar() {
                       <Link to="/signup">
                         <li
                           onClick={() => closeSideMenu()}
-                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                           SIGN UP
                         </li>
                       </Link>
@@ -92,7 +92,7 @@ export function NavBar() {
                       <Link to="/mycart">
                         <li
                           onClick={() => closeSideMenu()}
-                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                           MY CART
                         </li>
                       </Link>
@@ -101,7 +101,7 @@ export function NavBar() {
                       <Link to="/login">
                         <li
                           onClick={() => closeSideMenu()}
-                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                           LOGIN
                         </li>
                       </Link>
@@ -109,7 +109,7 @@ export function NavBar() {
                       <Link to="/">
                         <li
                           onClick={() => handleLogout()}
-                          className="text-xl m-4 cursor-pointer p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+                          className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                           LOGOUT
                         </li>
                       </Link>

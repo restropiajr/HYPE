@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <AppContext.Provider value={contextValue}>
-      <div className="app-container flex flex-col min-h-screen relative">
+      <div className="app-container relative flex min-h-screen flex-col">
         <NavBar />
         <div className="flex-grow">
           <Routes>

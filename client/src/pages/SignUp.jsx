@@ -29,16 +29,16 @@ export function SignUp() {
 
   return (
     <>
-      <div className="signup-container w-full relative">
+      <div className="signup-container relative w-full">
         <div className="row-one">
-          <div className="col-one w-full flex flex-col items-center mt-24 mb-8">
+          <div className="col-one mb-8 mt-24 flex w-full flex-col items-center">
             <h2 className="text-3xl">SIGN UP</h2>
             <br />
             <form onSubmit={handleSubmit}>
               <label>
                 <input
                   required
-                  className="border-black border-2 p-2 m-4 block rounded text-lg w-80"
+                  className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
                   type="text"
                   name="username"
                   placeholder="Username"
@@ -47,7 +47,7 @@ export function SignUp() {
               <label>
                 <input
                   required
-                  className="border-black border-2 p-2 m-4 block rounded text-lg w-80"
+                  className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
                   type="email"
                   name="email"
                   placeholder="Email Address"
@@ -56,7 +56,7 @@ export function SignUp() {
               <label>
                 <input
                   required
-                  className="border-black border-2 p-2 m-4 block rounded text-lg w-80"
+                  className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -65,7 +65,7 @@ export function SignUp() {
               <button
                 disabled={isLoading}
                 type="submit"
-                className="border-black border-2 p-2 m-4 block rounded text-xl w-80 transition duration-200 ease-in-out md:hover:bg-red-600">
+                className="m-4 block w-80 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                 REGISTER
               </button>
             </form>
@@ -78,7 +78,7 @@ export function SignUp() {
           </div>
         </div>
         {isLoading && (
-          <div className="absolute top-[50%] right-[42%] md:right-[48%] z-10">
+          <div className="absolute right-[42%] top-[50%] z-10 md:right-[48%]">
             <Circles
               height="80"
               width="80"

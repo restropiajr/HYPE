@@ -14,7 +14,7 @@ export function RotatingBanner({ images }) {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="col-one w-5/6 flex flex-col m-auto justify-center items-center mt-24 mb-8 md:mb-16">
+    <div className="col-one m-auto mb-8 mt-24 flex w-5/6 flex-col items-center justify-center md:mb-16">
       <Banner image={images[currentIndex]} />
       <PrevButton
         onPrev={() =>
@@ -37,7 +37,7 @@ function Banner({ image }) {
   return (
     <div
       style={{ backgroundImage: `url(${image.src})` }}
-      className="z-0 w-full h-[200px] md:h-[900px] bg-cover bg-center relative duration-500"></div>
+      className="relative z-0 h-[200px] w-full bg-cover bg-center duration-500 md:h-[900px]"></div>
   );
 }
 
@@ -62,7 +62,7 @@ function Indicators({ count, currentIndex, onSelect }) {
     return indicators;
   }
   return (
-    <div className="flex absolute bottom-[1%] right-auto">
+    <div className="absolute bottom-[1%] right-auto flex">
       {renderIndicator()}
     </div>
   );
@@ -72,7 +72,7 @@ function NextButton({ onNext }) {
   return (
     <button
       onClick={() => onNext()}
-      className="absolute top-[42.5%] right-[1%] md:right-[3.5%] md:p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+      className="absolute right-[1%] top-[42.5%] rounded transition duration-200 ease-in-out md:right-[3.5%] md:p-2 md:hover:bg-red-600">
       <FaAngleRight size={20} color="black" />
     </button>
   );
@@ -82,7 +82,7 @@ function PrevButton({ onPrev }) {
   return (
     <button
       onClick={() => onPrev()}
-      className="absolute top-[42.5%] left-[1%] md:left-[3.5%] md:p-2 rounded transition duration-200 ease-in-out md:hover:bg-red-600">
+      className="absolute left-[1%] top-[42.5%] rounded transition duration-200 ease-in-out md:left-[3.5%] md:p-2 md:hover:bg-red-600">
       <FaAngleLeft size={20} color="black" />
     </button>
   );

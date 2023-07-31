@@ -21,7 +21,7 @@ export function ScrollUpButton() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className={`fixed bottom-2 right-2 bg-red-600 p-2 rounded ${
+      className={`fixed bottom-2 right-2 rounded bg-red-600 p-2 ${
         showButton ? 'opacity-100' : 'opacity-0'
       } transition duration-200 ease-in-out md:hover:bg-white`}>
       <FaAngleUp size={25} color="black" />
