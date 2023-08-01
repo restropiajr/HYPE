@@ -1,4 +1,32 @@
+import { useEffect, useState } from 'react';
+import { Vortex } from 'react-loader-spinner';
+
 export function Contact() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 bottom-[30%] flex items-center justify-center">
+        <Vortex
+          visible={true}
+          height="150"
+          width="150"
+          ariaLabel="vortex-loading"
+          wrapperStyle={{}}
+          wrapperClass="vortex-wrapper"
+          colors={['red', 'black', 'red', 'black', 'red', 'black']}
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="contact-container w-full">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
+import { Vortex } from 'react-loader-spinner';
 import { productsFetcher } from '../lib';
 import { ProductList } from '../components';
 
@@ -28,15 +28,15 @@ export function Products() {
 
   if (isLoading) {
     return (
-      <div className=" fixed right-[37.5%] top-[30%] md:right-[47.5%]">
-        <Circles
-          height="80"
-          width="80"
-          color="red"
-          ariaLabel="circles-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
+      <div className="fixed inset-0 bottom-[30%] flex items-center justify-center">
+        <Vortex
           visible={true}
+          height="150"
+          width="150"
+          ariaLabel="vortex-loading"
+          wrapperStyle={{}}
+          wrapperClass="vortex-wrapper"
+          colors={['red', 'black', 'red', 'black', 'red', 'black']}
         />
       </div>
     );
@@ -83,6 +83,7 @@ export function Products() {
                 onChange={(event) => setFilterByInput(event.target.value)}
                 className="m-2 w-40 rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
                 <option value="">--FILTER BY--</option>
+                <option value="">ALL</option>
                 <option value="shoe">SHOES</option>
                 <option value="top">TOPS</option>
                 <option value="bottom">BOTTOMS</option>

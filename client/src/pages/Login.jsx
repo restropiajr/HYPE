@@ -3,15 +3,19 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../lib/AppContext';
 import { loginFetcher } from '../lib';
-import { Circles } from 'react-loader-spinner';
+import { Vortex } from 'react-loader-spinner';
 
 export function Login() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { user, handleLogin } = useContext(AppContext);
 
   useEffect(() => {
     if (user) navigate('/');
+    const timeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timeoutId);
   }, [user, navigate]);
 
   async function handleSubmit(event) {
@@ -25,6 +29,22 @@ export function Login() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 bottom-[30%] flex items-center justify-center">
+        <Vortex
+          visible={true}
+          height="150"
+          width="150"
+          ariaLabel="vortex-loading"
+          wrapperStyle={{}}
+          wrapperClass="vortex-wrapper"
+          colors={['red', 'black', 'red', 'black', 'red', 'black']}
+        />
+      </div>
+    );
   }
 
   return (
@@ -68,19 +88,6 @@ export function Login() {
             </p>
           </div>
         </div>
-        {isLoading && (
-          <div className="absolute right-[42%] top-[50%] z-10 md:right-[48%]">
-            <Circles
-              height="80"
-              width="80"
-              color="red"
-              ariaLabel="circles-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
-          </div>
-        )}
       </div>
     </>
   );
