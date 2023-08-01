@@ -72,16 +72,17 @@ export function Products() {
                 name="categories"
                 className="m-2 w-40 rounded border-2 border-black bg-red-600 text-center text-xs font-bold"
                 onChange={(event) => setSortByInput(event.target.value)}>
-                <option value="a-to-z">A-Z</option>
-                <option value="z-to-a">Z-A</option>
-                <option value="desc">HIGHEST PRICE</option>
-                <option value="asc">LOWEST PRICE</option>
+                <option value="">--SORT BY--</option>
+                <option value="alpha-order">A-Z</option>
+                <option value="reverse-alpha-order">Z-A</option>
+                <option value="asc">PRICE: LOW TO HIGH</option>
+                <option value="desc">PRICE: HIGH TO LOW</option>
               </select>
               <select
                 name="categories"
                 onChange={(event) => setFilterByInput(event.target.value)}
                 className="m-2 w-40 rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
-                <option value="">CHOOSE A CATEGORY</option>
+                <option value="">--FILTER BY--</option>
                 <option value="shoe">SHOES</option>
                 <option value="top">TOPS</option>
                 <option value="bottom">BOTTOMS</option>
@@ -92,7 +93,7 @@ export function Products() {
               type="search"
               onChange={(event) => setSearchByInput(event.target.value)}
               placeholder="SEARCH"
-              className="m-2 w-40 rounded border-2 border-black bg-red-600 p-2 text-center  text-xs font-bold"
+              className="m-2 w-40 rounded border-2 border-black bg-red-600 p-2 text-center text-xs font-bold"
             />
           </div>
         </div>
