@@ -30,9 +30,9 @@ function Product({ product }) {
         <div className="card-body flex flex-col items-center justify-center">
           <h4 className="card-title m-2 text-xl">{name}</h4>
           <p className="card-description m-2 text-lg">{description}</p>
-          <p className="card-price m-2 text-lg">{`$${Number(price).toFixed(
-            2
-          )}`}</p>
+          <p className="card-price m-2 text-lg font-bold">{`$${Number(
+            price
+          ).toFixed(2)}`}</p>
         </div>
       </div>
     </Link>
