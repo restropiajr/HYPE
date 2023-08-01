@@ -1,4 +1,4 @@
-export async function LoginFetcher(event) {
+export async function loginFetcher(event) {
   const formData = new FormData(event.target);
   const userData = Object.fromEntries(formData.entries());
   const req = {

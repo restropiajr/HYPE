@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../lib/AppContext';
-import { SignInFetcher } from '../lib';
+import { signInFetcher } from '../lib';
 import { Circles } from 'react-loader-spinner';
 
 export function SignUp() {
@@ -18,7 +18,7 @@ export function SignUp() {
     event.preventDefault();
     try {
       setIsLoading(true);
-      await SignInFetcher(event);
+      await signInFetcher(event);
       navigate('/login');
     } catch (error) {
       alert(`Error registering user: ${error}`);

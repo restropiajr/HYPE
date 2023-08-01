@@ -12,11 +12,11 @@
 
 INSERT INTO "products" ("productId", "name", "category", "price", "description", "imageUrl")
 VALUES
-  (1, 'Product 1', 'Category A', 10.99, 'Description for Product 1', 'https://unsplash.com/photos/V8khtfwQ-fM'),
-  (2, 'Product 2', 'Category B', 19.99, 'Description for Product 2', 'https://unsplash.com/photos/9SABtP1KBWk'),
-  (3, 'Product 3', 'Category A', 15.49, 'Description for Product 3', 'https://unsplash.com/photos/Ra4comqu9KA'),
-  (4, 'Product 4', 'Category C', 17.50, 'Description for Product 4', 'https://unsplash.com/photos/qAPUeAQxVkE'),
-  (5, 'Product 5', 'Category B', 12.25, 'Description for Product 5', 'https://unsplash.com/photos/TpQzi23vsLA');
+  (1, 'Product 1', 'shoe', 10.99, 'Description for Product 1', '/products/image-1.jpg'),
+  (2, 'Product 2', 'accessory', 19.99, 'Description for Product 2', '/products/image-2.jpg'),
+  (3, 'Product 3', 'shoe', 15.49, 'Description for Product 3', '/products/image-3.jpg'),
+  (4, 'Product 4', 'top', 17.50, 'Description for Product 4', '/products/image-4.jpg'),
+  (5, 'Product 5', 'bottom', 12.25, 'Description for Product 5', '/products/image-5.jpg');
 
 INSERT INTO "users" ("username", "hashedPassword", "email")
 VALUES

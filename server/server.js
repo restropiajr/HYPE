@@ -34,20 +34,6 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
         'username, password, and email are required fields'
       );
     }
-    const usernameCheckSQL = `
-                             select 1
-                             from "users"
-                             where username = $1
-                             limit 1;
-    `;
-    const usernameCheckParams = [username];
-    const usernameCheckResult = await db.query(
-      usernameCheckSQL,
-      usernameCheckParams
-    );
-    const [usernameDuplicate] = usernameCheckResult.rows;
-    if (usernameDuplicate)
-      throw new ClientError(400, 'username is already taken');
     const hashedPassword = await argon2.hash(password);
     const sql = `
           insert into "users" ("username", "hashedPassword", "email")
