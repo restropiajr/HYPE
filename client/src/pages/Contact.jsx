@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Vortex } from 'react-loader-spinner';
+import { LoadingSpinner } from '../components';
 
 export function Contact() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,19 +12,7 @@ export function Contact() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="fixed inset-0 bottom-[30%] flex items-center justify-center">
-        <Vortex
-          visible={true}
-          height="150"
-          width="150"
-          ariaLabel="vortex-loading"
-          wrapperStyle={{}}
-          wrapperClass="vortex-wrapper"
-          colors={['red', 'black', 'red', 'black', 'red', 'black']}
-        />
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (

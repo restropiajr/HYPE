@@ -59,12 +59,14 @@ function Product({ product }) {
   const { productId, name, price, imageUrl } = product;
   return (
     <Link to={`/details/${productId}`}>
-      <div className="card-wrapper m-8">
+      <div className="card-wrapper group m-8">
         <div className="img-wrapper w-full">
           <img className="w-full" src={imageUrl} alt="name" />
         </div>
         <div className="card-body flex flex-col items-center justify-center">
-          <h4 className="card-title m-2 text-xl">{name}</h4>
+          <h4 className="card-name m-2 rounded p-2 text-xl transition duration-200 ease-in-out md:group-hover:bg-red-600">
+            {name}
+          </h4>
           <p className="card-price m-2 text-lg font-bold">{`$${Number(
             price
           ).toFixed(2)}`}</p>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Vortex } from 'react-loader-spinner';
 import { productsFetcher } from '../lib';
-import { ProductList } from '../components';
+import { ProductList, LoadingSpinner, ErrorMessage } from '../components';
 
 export function Products() {
   const [products, setProducts] = useState();
@@ -27,27 +26,11 @@ export function Products() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="fixed inset-0 bottom-[30%] flex items-center justify-center">
-        <Vortex
-          visible={true}
-          height="150"
-          width="150"
-          ariaLabel="vortex-loading"
-          wrapperStyle={{}}
-          wrapperClass="vortex-wrapper"
-          colors={['red', 'black', 'red', 'black', 'red', 'black']}
-        />
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return (
-      <div className="flex items-center justify-center">
-        <p className="text-xl">Error Loading Products: {error}</p>
-      </div>
-    );
+    return <ErrorMessage error={error} />;
   }
 
   return (
@@ -70,7 +53,7 @@ export function Products() {
             <div className="flex">
               <select
                 name="categories"
-                className="m-2 w-40 rounded border-2 border-black bg-red-600 text-center text-xs font-bold"
+                className="m-2 w-40 cursor-pointer rounded border-2 border-black bg-red-600 text-center text-xs font-bold"
                 onChange={(event) => setSortByInput(event.target.value)}>
                 <option value="">--SORT BY--</option>
                 <option value="alpha-order">A-Z</option>
@@ -81,8 +64,10 @@ export function Products() {
               <select
                 name="categories"
                 onChange={(event) => setFilterByInput(event.target.value)}
-                className="m-2 w-40 rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
-                <option value="">--FILTER BY--</option>
+                className="m-2 w-40 cursor-pointer rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
+                <option value="" disabled>
+                  --FILTER BY--
+                </option>
                 <option value="">ALL</option>
                 <option value="shoe">SHOES</option>
                 <option value="top">TOPS</option>

@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../lib/AppContext';
-import { loginFetcher } from '../lib';
-import { Vortex } from 'react-loader-spinner';
+import { loginFetcher, AppContext } from '../lib';
+import { LoadingSpinner } from '../components';
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,19 +31,7 @@ export function Login() {
   }
 
   if (isLoading) {
-    return (
-      <div className="fixed inset-0 bottom-[30%] flex items-center justify-center">
-        <Vortex
-          visible={true}
-          height="150"
-          width="150"
-          ariaLabel="vortex-loading"
-          wrapperStyle={{}}
-          wrapperClass="vortex-wrapper"
-          colors={['red', 'black', 'red', 'black', 'red', 'black']}
-        />
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (

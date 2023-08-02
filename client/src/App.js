@@ -10,7 +10,7 @@ import {
 } from './pages';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from './lib/AppContext';
+import { AppContext } from './lib';
 
 const tokenKey = 'react-context-jwt';
 
