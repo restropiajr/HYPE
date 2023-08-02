@@ -65,9 +65,7 @@ export function Products() {
                 name="categories"
                 onChange={(event) => setFilterByInput(event.target.value)}
                 className="m-2 w-40 cursor-pointer rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
-                <option value="" disabled>
-                  --FILTER BY--
-                </option>
+                <option value="">--FILTER BY--</option>
                 <option value="">ALL</option>
                 <option value="shoe">SHOES</option>
                 <option value="top">TOPS</option>

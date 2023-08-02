@@ -20,13 +20,16 @@ export function Accordion({ accordionTopics }) {
             key={id}>
             <button
               onClick={() => handleClick(id)}
-              className={`w-3/4 rounded border-2 border-solid border-black ${
+              className={`w-3/4 rounded border-2 border-solid border-black md:w-1/6 ${
                 expandTopic === id ? 'bg-white' : 'bg-red-600'
-              } text-md font-bold`}>
+              } text-md font-bold transition-colors duration-200 ease-in-out`}>
               {topic}
             </button>
             {expandTopic === id && (
-              <p className="w-3/4 rounded border-2 border-solid border-black p-2 text-justify text-xs">
+              <p
+                className={`w-3/4 rounded border-2 border-solid border-black p-2 text-justify text-xs transition-opacity duration-500 ease-in-out md:w-1/6 ${
+                  expandTopic === id ? 'opacity-100' : 'opacity-0'
+                }`}>
                 {description}
               </p>
             )}

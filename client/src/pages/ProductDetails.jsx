@@ -8,6 +8,7 @@ export function ProductDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState();
   const [error, setError] = useState();
+  // const [size, setSize] = useState();
 
   useEffect(() => {
     async function loadProduct() {
@@ -59,13 +60,13 @@ export function ProductDetails() {
       <div className="product-details-container w-full">
         <div className="row-one">
           <div className="col-one mt-24 flex w-full flex-col items-center justify-center">
-            <div className="card-wrapper mx-8">
-              <div className="img-wrapper w-full">
+            <div className="card-wrapper mx-8 md:flex md:flex-col md:items-center">
+              <div className="img-wrapper w-full md:w-3/4">
                 <img className="w-full" src={imageUrl} alt="name" />
               </div>
               <div className="card-body flex flex-col items-center justify-center">
-                <h4 className="card-name m-2 p-2 text-xl">{name}</h4>
-                <p className="card-price m-2 text-lg font-bold">{`$${Number(
+                <h4 className="card-name p-2 text-xl">{name}</h4>
+                <p className="card-price mb-2 text-lg font-bold">{`$${Number(
                   price
                 ).toFixed(2)}`}</p>
               </div>
@@ -75,8 +76,29 @@ export function ProductDetails() {
         <div className="row-two">
           <Accordion accordionTopics={accordionTopics} />
         </div>
-        <div className="row-two">
-          <div className="col-one flex w-full flex-col items-center justify-center"></div>
+        <div className="row-three">
+          <div className="col-one mb-8 flex w-full flex-col items-center justify-center">
+            <h4 className="card-name m-2 text-xl">SIZE</h4>
+            <form className="flex w-full flex-col items-center justify-center">
+              <select
+                name="size"
+                className="w-3/4 cursor-pointer rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
+                {/* onChange={(event) => setSize(event.target.value)}> */}
+                <option value="">--CHOOSE A SIZE--</option>
+                <option value="xs">EXTRA SMALL</option>
+                <option value="sm">SMALL</option>
+                <option value="md">MEDIUM</option>
+                <option value="lg">LARGE</option>
+                <option value="xl">EXTRA LARGE</option>
+              </select>
+              <button
+                disabled={isLoading}
+                type="submit"
+                className="m-4 block w-3/4 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
+                ADD TO CART
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </>
