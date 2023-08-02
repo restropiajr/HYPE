@@ -34,6 +34,27 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
         'username, password, and email are required fields'
       );
     }
+    const checkDuplicateSql = `
+          select *
+          from "users"
+          where "username" = $1 or "email" = $2
+    `;
+    const checkDuplicateParams = [username, email];
+    const duplicateResults = await db.query(
+      checkDuplicateSql,
+      checkDuplicateParams
+    );
+    const duplicates = duplicateResults.rows;
+    if (duplicates.length > 0) {
+      duplicates.forEach((duplicate) => {
+        if (duplicate.username === username) {
+          throw new ClientError(400, 'Username is already taken');
+        }
+        if (duplicate.email === email) {
+          throw new ClientError(400, 'Email is already taken');
+        }
+      });
+    }
     const hashedPassword = await argon2.hash(password);
     const sql = `
           insert into "users" ("username", "hashedPassword", "email")
