@@ -1,4 +1,20 @@
+import { useEffect, useState } from 'react';
+import { LoadingSpinner } from '../components';
+
 export function Contact() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <>
       <div className="contact-container w-full">

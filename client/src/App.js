@@ -1,9 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
 import { NavBar, Footer, ScrollUpButton } from './components';
-import { Home, Contact, SignUp, Login, Products } from './pages';
+import {
+  Home,
+  Contact,
+  SignUp,
+  Login,
+  Products,
+  ProductDetails,
+} from './pages';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from './lib/AppContext';
+import { AppContext } from './lib';
 
 const tokenKey = 'react-context-jwt';
 
@@ -54,8 +61,11 @@ export default function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/products" element={<Products />} />
-            {/* <Route path="/details/:productId" element={<ProductDetails />} />
-          <Route path="/mycart" element={<MyCart />} />
+            <Route
+              path="/product/details/:productId"
+              element={<ProductDetails />}
+            />
+            {/* <Route path="/mycart" element={<MyCart />} />
           <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </div>

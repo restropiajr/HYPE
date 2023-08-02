@@ -42,30 +42,23 @@ function Banner({ image }) {
 }
 
 function Indicators({ count, currentIndex, onSelect }) {
-  function renderIndicator() {
-    const indicators = [];
-    for (let index = 0; index < count; index++) {
-      indicators.push(
-        <button
-          key={index}
-          type="button"
-          onClick={() => onSelect(index)}
-          className="mx-1">
-          {index === currentIndex ? (
-            <BsCircleFill size={10} color="red" />
-          ) : (
-            <BsCircleFill size={10} color="black" />
-          )}
-        </button>
-      );
-    }
-    return indicators;
+  const indicators = [];
+  for (let index = 0; index < count; index++) {
+    indicators.push(
+      <button
+        key={index}
+        type="button"
+        onClick={() => onSelect(index)}
+        className="mx-1">
+        {index === currentIndex ? (
+          <BsCircleFill size={10} color="red" />
+        ) : (
+          <BsCircleFill size={10} color="black" />
+        )}
+      </button>
+    );
   }
-  return (
-    <div className="absolute bottom-[1%] right-auto flex">
-      {renderIndicator()}
-    </div>
-  );
+  return <div className="absolute bottom-[1%] flex">{indicators}</div>;
 }
 
 function NextButton({ onNext }) {

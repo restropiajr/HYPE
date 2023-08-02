@@ -1,30 +1,37 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../lib/AppContext';
-import { signInFetcher } from '../lib';
-import { Circles } from 'react-loader-spinner';
+import { signUpFetcher, AppContext } from '../lib';
+import { LoadingSpinner } from '../components';
 
 export function SignUp() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
 
   useEffect(() => {
     if (user) navigate('/');
+    const timeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timeoutId);
   }, [user, navigate]);
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
       setIsLoading(true);
-      await signInFetcher(event);
+      await signUpFetcher(event);
       navigate('/login');
     } catch (error) {
       alert(`Error registering user: ${error}`);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner />;
   }
 
   return (
@@ -77,19 +84,6 @@ export function SignUp() {
             </p>
           </div>
         </div>
-        {isLoading && (
-          <div className="absolute right-[42%] top-[50%] z-10 md:right-[48%]">
-            <Circles
-              height="80"
-              width="80"
-              color="red"
-              ariaLabel="circles-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
-          </div>
-        )}
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
 import { productsFetcher } from '../lib';
-import { ProductList } from '../components';
+import { ProductList, LoadingSpinner, ErrorMessage } from '../components';
 
 export function Products() {
   const [products, setProducts] = useState();
@@ -27,27 +26,11 @@ export function Products() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className=" fixed right-[37.5%] top-[30%] md:right-[47.5%]">
-        <Circles
-          height="80"
-          width="80"
-          color="red"
-          ariaLabel="circles-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return (
-      <div className="flex items-center justify-center">
-        <p className="text-xl">Error Loading Products: {error}</p>
-      </div>
-    );
+    return <ErrorMessage error={error} />;
   }
 
   return (
@@ -70,7 +53,7 @@ export function Products() {
             <div className="flex">
               <select
                 name="categories"
-                className="m-2 w-40 rounded border-2 border-black bg-red-600 text-center text-xs font-bold"
+                className="m-2 w-40 cursor-pointer rounded border-2 border-black text-center text-xs font-bold"
                 onChange={(event) => setSortByInput(event.target.value)}>
                 <option value="">--SORT BY--</option>
                 <option value="alpha-order">A-Z</option>
@@ -81,8 +64,9 @@ export function Products() {
               <select
                 name="categories"
                 onChange={(event) => setFilterByInput(event.target.value)}
-                className="m-2 w-40 rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
+                className="m-2 w-40 cursor-pointer rounded border-2 border-black text-center text-xs font-bold">
                 <option value="">--FILTER BY--</option>
+                <option value="">ALL</option>
                 <option value="shoe">SHOES</option>
                 <option value="top">TOPS</option>
                 <option value="bottom">BOTTOMS</option>
@@ -93,7 +77,7 @@ export function Products() {
               type="search"
               onChange={(event) => setSearchByInput(event.target.value)}
               placeholder="SEARCH"
-              className="m-2 w-40 rounded border-2 border-black bg-red-600 p-2 text-center text-xs font-bold"
+              className="m-2 w-40 rounded border-2 border-black p-2 text-center text-xs font-bold transition duration-200 ease-in-out focus:bg-red-600 md:hover:bg-red-600"
             />
           </div>
         </div>
