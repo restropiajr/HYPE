@@ -38,12 +38,21 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     const sql = `
           insert into "users" ("username", "hashedPassword", "email")
           values ($1, $2, $3)
-          returning *;
+          returning "userId", "username";
     `;
     const params = [username, hashedPassword, email];
     const result = await db.query(sql, params);
     const [user] = result.rows;
-    res.status(201).json(user);
+    const { userId } = user;
+    const sqlCartJoin = `
+          insert into "carts" ("userId")
+          values ($1)
+          returning "cartId", "userId";
+    `;
+    const params2 = [userId];
+    const result2 = await db.query(sqlCartJoin, params2);
+    const [cart] = result2.rows;
+    res.status(201).json({ user, cart });
   } catch (error) {
     next(error);
   }
@@ -56,18 +65,19 @@ app.post('/api/auth/log-in', async (req, res, next) => {
       throw new ClientError(401, 'invalid login');
     }
     const sql = `
-          select "userId", "hashedPassword"
+          select "users"."userId", "users"."hashedPassword", "carts"."cartId"
           from "users"
+          join "carts" on "users"."userId" = "carts"."userId"
           where "username" = $1
     `;
     const params = [username];
     const result = await db.query(sql, params);
     const [user] = result.rows;
     if (!user) throw new ClientError(401, 'invalid login');
-    const { userId, hashedPassword } = user;
+    const { userId, hashedPassword, cartId } = user;
     const isMatching = await argon2.verify(hashedPassword, password);
     if (!isMatching) throw new ClientError(401, 'invalid login');
-    const payload = { userId, username };
+    const payload = { userId, username, cartId };
     const hashKey = process.env.TOKEN_SECRET;
     if (!hashKey) throw new Error('TOKEN_SECRET not found in .env');
     const token = jwt.sign(payload, hashKey);
@@ -91,7 +101,7 @@ app.get('/api/products', async (req, res, next) => {
   }
 });
 
-app.get('/api/details/:productId', async (req, res, next) => {
+app.get('/api/product/details/:productId', async (req, res, next) => {
   try {
     const productId = Number(req.params.productId);
     if (!productId)
@@ -114,6 +124,8 @@ app.get('/api/details/:productId', async (req, res, next) => {
     next(error);
   }
 });
+
+app.post('/api/mycart');
 
 /**
  * Serves React's index.html if no api route matches.

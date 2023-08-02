@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInFetcher, AppContext } from '../lib';
+import { signUpFetcher, AppContext } from '../lib';
 import { LoadingSpinner } from '../components';
 
 export function SignUp() {
@@ -21,7 +21,7 @@ export function SignUp() {
     event.preventDefault();
     try {
       setIsLoading(true);
-      await signInFetcher(event);
+      await signUpFetcher(event);
       navigate('/login');
     } catch (error) {
       alert(`Error registering user: ${error}`);

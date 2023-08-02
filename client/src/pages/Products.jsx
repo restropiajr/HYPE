@@ -53,7 +53,7 @@ export function Products() {
             <div className="flex">
               <select
                 name="categories"
-                className="m-2 w-40 cursor-pointer rounded border-2 border-black bg-red-600 text-center text-xs font-bold"
+                className="m-2 w-40 cursor-pointer rounded border-2 border-black text-center text-xs font-bold"
                 onChange={(event) => setSortByInput(event.target.value)}>
                 <option value="">--SORT BY--</option>
                 <option value="alpha-order">A-Z</option>
@@ -64,7 +64,7 @@ export function Products() {
               <select
                 name="categories"
                 onChange={(event) => setFilterByInput(event.target.value)}
-                className="m-2 w-40 cursor-pointer rounded border-2 border-black bg-red-600 text-center text-xs font-bold">
+                className="m-2 w-40 cursor-pointer rounded border-2 border-black text-center text-xs font-bold">
                 <option value="">--FILTER BY--</option>
                 <option value="">ALL</option>
                 <option value="shoe">SHOES</option>
@@ -77,7 +77,7 @@ export function Products() {
               type="search"
               onChange={(event) => setSearchByInput(event.target.value)}
               placeholder="SEARCH"
-              className="m-2 w-40 rounded border-2 border-black bg-red-600 p-2 text-center text-xs font-bold"
+              className="m-2 w-40 rounded border-2 border-black p-2 text-center text-xs font-bold transition duration-200 ease-in-out focus:bg-red-600 md:hover:bg-red-600"
             />
           </div>
         </div>

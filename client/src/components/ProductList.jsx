@@ -58,7 +58,7 @@ export function ProductList({
 function Product({ product }) {
   const { productId, name, price, imageUrl } = product;
   return (
-    <Link to={`/details/${productId}`}>
+    <Link to={`/product/details/${productId}`}>
       <div className="card-wrapper group m-8">
         <div className="img-wrapper w-full">
           <img className="w-full" src={imageUrl} alt="name" />
