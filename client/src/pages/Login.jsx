@@ -24,7 +24,7 @@ export function Login() {
       const auth = await loginFetcher(event);
       handleLogin(auth);
     } catch (error) {
-      alert(`Error logging in: ${error}`);
+      alert(error);
     } finally {
       setIsLoading(false);
     }

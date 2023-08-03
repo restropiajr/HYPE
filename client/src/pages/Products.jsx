@@ -40,7 +40,7 @@ export function Products() {
           <div className="col-one mb-8 mt-24 flex w-full flex-col items-center justify-center">
             <h2 className="text-3xl">PRODUCTS</h2>
             <br />
-            <p className="px-4 text-justify text-lg">
+            <p className="px-4 text-justify text-xl">
               Discover the hottest streetwear, exclusive sneakers, and
               trendsetting clothing that define the urban culture. Elevate your
               style and make a statement with our curated collection of iconic

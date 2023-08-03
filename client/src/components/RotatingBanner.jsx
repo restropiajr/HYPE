@@ -2,8 +2,26 @@ import { useEffect, useState } from 'react';
 import { BsCircleFill } from 'react-icons/bs';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6';
 
-export function RotatingBanner({ images }) {
+export function RotatingBanner() {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = [
+    {
+      src: '/images/supreme-carousel.jpg',
+    },
+    {
+      src: '/images/palace-carousel.png',
+    },
+    {
+      src: '/images/jordansupreme-carousel.jpg',
+    },
+    {
+      src: '/images/stussy-carousel.png',
+    },
+    {
+      src: '/images/mj-carousel.jpg',
+    },
+  ];
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -14,7 +32,7 @@ export function RotatingBanner({ images }) {
   }, [currentIndex, images.length]);
 
   return (
-    <div className="col-one m-auto mb-8 mt-24 flex w-5/6 flex-col items-center justify-center md:mb-16">
+    <div className="col-one m-auto mb-8 flex w-3/4 flex-col items-center justify-center md:mb-16">
       <Banner image={images[currentIndex]} />
       <PrevButton
         onPrev={() =>
@@ -37,7 +55,7 @@ function Banner({ image }) {
   return (
     <div
       style={{ backgroundImage: `url(${image.src})` }}
-      className="relative z-0 h-[200px] w-full bg-cover bg-center duration-500 md:h-[900px]"></div>
+      className="relative z-0 h-[200px] w-full bg-cover bg-center duration-500 md:h-[750px]"></div>
   );
 }
 
@@ -58,15 +76,19 @@ function Indicators({ count, currentIndex, onSelect }) {
       </button>
     );
   }
-  return <div className="absolute bottom-[1%] flex">{indicators}</div>;
+  return (
+    <div className="absolute bottom-[0%] left-[50%] z-0 -translate-x-1/2">
+      {indicators}
+    </div>
+  );
 }
 
 function NextButton({ onNext }) {
   return (
     <button
       onClick={() => onNext()}
-      className="absolute right-[1%] top-[42.5%] rounded transition duration-200 ease-in-out md:right-[3.5%] md:p-2 md:hover:bg-red-600">
-      <FaAngleRight size={20} color="black" />
+      className="absolute left-[95%] top-[50%] z-0 -translate-x-1/2 -translate-y-1/2 rounded transition duration-200 ease-in-out md:p-2 md:hover:bg-red-600">
+      <FaAngleRight size={30} color="black" />
     </button>
   );
 }
@@ -75,8 +97,8 @@ function PrevButton({ onPrev }) {
   return (
     <button
       onClick={() => onPrev()}
-      className="absolute left-[1%] top-[42.5%] rounded transition duration-200 ease-in-out md:left-[3.5%] md:p-2 md:hover:bg-red-600">
-      <FaAngleLeft size={20} color="black" />
+      className="absolute right-[95%] top-[50%] z-0 -translate-y-1/2 translate-x-1/2 rounded transition duration-200 ease-in-out md:p-2 md:hover:bg-red-600">
+      <FaAngleLeft size={30} color="black" />
     </button>
   );
 }

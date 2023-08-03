@@ -1,7 +1,7 @@
-export function ErrorMessage(error) {
+export function ErrorMessage({ error }) {
   return (
-    <div className="flex items-center justify-center">
-      <p className="text-xl">Error Loading Products: {error}</p>
+    <div className="mx-4 mt-24 flex items-center justify-center">
+      <p className="text-center text-xl">ERROR: {error.message}</p>
     </div>
   );
 }

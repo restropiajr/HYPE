@@ -6,3 +6,4 @@ export * from './ProductList';
 export * from './Accordion';
 export * from './LoadingSpinner';
 export * from './ErrorMessage';
+export * from './ProductForm';

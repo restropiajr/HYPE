@@ -24,7 +24,7 @@ export function SignUp() {
       await signUpFetcher(event);
       navigate('/login');
     } catch (error) {
-      alert(`Error registering user: ${error}`);
+      alert(error);
     } finally {
       setIsLoading(false);
     }
