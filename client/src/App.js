@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { NavBar, Footer, ScrollUpButton } from './components';
+import { NavBar, Footer, ScrollUpButton, LoadingSpinner } from './components';
 import {
   Home,
   Contact,
@@ -31,7 +31,9 @@ export default function App() {
     setIsAuthorizing(false);
   }, []);
 
-  if (isAuthorizing) return null;
+  if (isAuthorizing) {
+    return <LoadingSpinner />;
+  }
 
   function handleLogin(auth) {
     const { user, token } = auth;

@@ -26,7 +26,7 @@ export function NavBar() {
     <>
       <nav className="navbar-container w-full">
         <div className="row-one">
-          <div className="col-one fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-white">
+          <div className="col-one fixed left-0 top-0 z-10 flex w-full items-center justify-between bg-white">
             <div className="m-4 cursor-pointer" onClick={() => openSideMenu()}>
               <FaBars size={30} color="black" />
             </div>

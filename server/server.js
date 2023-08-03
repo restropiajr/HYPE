@@ -146,7 +146,14 @@ app.get('/api/product/details/:productId', async (req, res, next) => {
   }
 });
 
-app.post('/api/mycart');
+// app.post('/api/mycart/add-to-cart', authorizationMiddleware, async (req,res,next) => {
+//   try {
+
+//   } catch (error) {
+//     next(error);
+//   }
+
+// });
 
 /**
  * Serves React's index.html if no api route matches.
