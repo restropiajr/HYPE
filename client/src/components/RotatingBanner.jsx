@@ -87,8 +87,8 @@ function NextButton({ onNext }) {
   return (
     <button
       onClick={() => onNext()}
-      className="absolute right-[3.5%] top-[42.5%] rounded transition duration-200 ease-in-out md:right-[5.5%] md:p-2 md:hover:bg-red-600">
-      <FaAngleRight size={20} color="black" />
+      className="absolute left-[95%] top-[50%] z-0 -translate-x-1/2 -translate-y-1/2 rounded transition duration-200 ease-in-out md:p-2 md:hover:bg-red-600">
+      <FaAngleRight size={30} color="black" />
     </button>
   );
 }
@@ -97,8 +97,8 @@ function PrevButton({ onPrev }) {
   return (
     <button
       onClick={() => onPrev()}
-      className="absolute left-[3.5%] top-[42.5%] rounded transition duration-200 ease-in-out md:left-[5.5%] md:p-2 md:hover:bg-red-600">
-      <FaAngleLeft size={20} color="black" />
+      className="absolute right-[95%] top-[50%] z-0 -translate-y-1/2 translate-x-1/2 rounded transition duration-200 ease-in-out md:p-2 md:hover:bg-red-600">
+      <FaAngleLeft size={30} color="black" />
     </button>
   );
 }
