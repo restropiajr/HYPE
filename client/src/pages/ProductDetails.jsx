@@ -13,9 +13,11 @@ export function ProductDetails() {
   const { productId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState();
-  const [error, setError] = useState();
+  const [productError, setProductError] = useState();
+  const [addedToCart, setAddedToCart] = useState(false);
+  const [quantityError, setQuantityError] = useState();
   const { user, token } = useContext(AppContext);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadProduct() {
@@ -23,7 +25,7 @@ export function ProductDetails() {
         const loadedProduct = await productDetailsFetcher(productId);
         setProduct(loadedProduct);
       } catch (error) {
-        setError(error);
+        setProductError(error);
       } finally {
         setIsLoading(false);
       }
@@ -34,14 +36,16 @@ export function ProductDetails() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (!user) navigate('login');
+    if (!user) navigate('/login');
     try {
       const { cartId } = user;
       setIsLoading(true);
-      await addToCartFetcher(event, cartId, productId, token);
-      navigate('/mycart');
+      await addToCartFetcher(event, cartId, token, productId);
+      setAddedToCart(true);
+      setQuantityError(null);
     } catch (error) {
-      setError(error);
+      setQuantityError(error);
+      setAddedToCart(false);
     } finally {
       setIsLoading(false);
     }
@@ -51,8 +55,8 @@ export function ProductDetails() {
     return <LoadingSpinner />;
   }
 
-  if (error) {
-    return <ErrorMessage error={error} />;
+  if (productError) {
+    return <ErrorMessage error={productError} />;
   }
 
   const { name, price, imageUrl, description, category } = product;
@@ -109,7 +113,8 @@ export function ProductDetails() {
         <div className="row-three">
           <ProductForm
             category={category}
-            isLoading={isLoading}
+            quantityError={quantityError}
+            addedToCart={addedToCart}
             handleSubmit={handleSubmit}
           />
         </div>

@@ -8,8 +8,5 @@ export async function signUpFetcher(event) {
   };
   const res = await fetch('/api/auth/sign-up', req);
   const result = await res.json();
-  if (!res.ok)
-    throw new Error(
-      `Fetch Error: ${result.error} (Status Code: ${res.status})`
-    );
+  if (!res.ok) throw new Error(result.error);
 }

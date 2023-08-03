@@ -8,9 +8,6 @@ export async function loginFetcher(event) {
   };
   const res = await fetch('/api/auth/log-in', req);
   const result = await res.json();
-  if (!res.ok)
-    throw new Error(
-      `Fetch Error: ${result.error} (Status Code: ${res.status})`
-    );
+  if (!res.ok) throw new Error(result.error);
   return result;
 }
