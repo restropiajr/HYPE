@@ -21,7 +21,7 @@ export function Home() {
       <div className="home-container w-full ">
         <div className="row-one">
           <div className="col-one mb-8 mt-24 w-full">
-            <h2 className="text-center text-4xl md:text-6xl">
+            <h2 className="text-center text-3xl md:text-6xl">
               FEATURED STREETWEAR BRANDS
             </h2>
           </div>
@@ -38,7 +38,7 @@ export function Home() {
                 alt="turtledoves"
               />
               <Link to="/products">
-                <h2 className="absolute left-[50%] top-[50%] z-0 -translate-x-1/2 -translate-y-1/2 rounded bg-red-600 p-2 text-center text-4xl text-black md:text-8xl">
+                <h2 className="absolute left-[50%] top-[50%] z-0 -translate-x-1/2 -translate-y-1/2 rounded bg-red-600 p-2 text-center text-3xl text-black md:text-6xl">
                   SHOP NOW
                 </h2>
               </Link>

@@ -42,33 +42,27 @@ export function SignUp() {
             <h2 className="text-3xl">SIGN UP</h2>
             <br />
             <form onSubmit={handleSubmit}>
-              <label>
-                <input
-                  required
-                  className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                />
-              </label>
-              <label>
-                <input
-                  required
-                  className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                />
-              </label>
-              <label>
-                <input
-                  required
-                  className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                />
-              </label>
+              <input
+                required
+                className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
+                type="text"
+                name="username"
+                placeholder="Username"
+              />
+              <input
+                required
+                className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
+                type="email"
+                name="email"
+                placeholder="Email Address"
+              />
+              <input
+                required
+                className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
               <button
                 disabled={isLoading}
                 type="submit"

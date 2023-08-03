@@ -4,3 +4,4 @@ export * from './productsFetcher';
 export * from './productDetailsFetcher';
 export * from './AppContext';
 export * from './addToCartFetcher';
+export * from './cartFetcher';

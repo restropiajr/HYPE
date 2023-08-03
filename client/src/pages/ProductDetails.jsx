@@ -38,9 +38,8 @@ export function ProductDetails() {
     event.preventDefault();
     if (!user) navigate('/login');
     try {
-      const { cartId } = user;
       setIsLoading(true);
-      await addToCartFetcher(event, cartId, token, productId);
+      await addToCartFetcher(event, token, productId);
       setAddedToCart(true);
       setQuantityError(null);
     } catch (error) {

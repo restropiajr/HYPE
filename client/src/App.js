@@ -7,6 +7,7 @@ import {
   Login,
   Products,
   ProductDetails,
+  MyCart,
 } from './pages';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -67,8 +68,8 @@ export default function App() {
               path="/product/details/:productId"
               element={<ProductDetails />}
             />
-            {/* <Route path="/mycart" element={<MyCart />} />
-          <Route path="*" element={<NotFound />} /> */}
+            <Route path="/mycart" element={<MyCart />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </div>
         <Footer />
