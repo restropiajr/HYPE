@@ -8,3 +8,4 @@ export * from './cartFetcher';
 export * from './utility';
 export * from './emptyCartFetcher';
 export * from './updatedQuantityFetcher';
+export * from './ShoppingCartContext';

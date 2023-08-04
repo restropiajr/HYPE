@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { FaBars, FaCartShopping } from 'react-icons/fa6';
 import { useState, useContext } from 'react';
-import { AppContext } from '../lib/AppContext';
+import { AppContext, ShoppingCartContext } from '../lib';
 
 export function NavBar() {
   const [isSideMenuOpen, setisSideMenuOpen] = useState(false);
   const { user, handleSignOut } = useContext(AppContext);
+  const { totalQuantity } = useContext(ShoppingCartContext);
 
   function openSideMenu() {
     setisSideMenuOpen(true);
@@ -34,8 +35,11 @@ export function NavBar() {
               <h1 className="m-4 cursor-pointer text-5xl">HYPE</h1>
             </Link>
             <Link to="/mycart">
-              <div className="m-4">
+              <div className="relative m-4">
                 <FaCartShopping size={30} color="black" />
+                <div className="absolute -right-2 -top-2 rounded-full border-2 border-red-600 bg-red-600 p-1 text-xs text-white">
+                  {totalQuantity}
+                </div>
               </div>
             </Link>
           </div>

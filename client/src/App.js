@@ -11,7 +11,7 @@ import {
 } from './pages';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from './lib';
+import { AppContext, ShoppingCartProvider } from './lib';
 
 const tokenKey = 'react-context-jwt';
 
@@ -55,26 +55,28 @@ export default function App() {
 
   return (
     <AppContext.Provider value={contextValue}>
-      <div className="app-container relative flex min-h-screen flex-col">
-        <NavBar />
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/products" element={<Products />} />
-            <Route
-              path="/product/details/:productId"
-              element={<ProductDetails />}
-            />
-            <Route path="/mycart" element={<MyCart />} />
-            {/* <Route path="*" element={<NotFound />} /> */}
-          </Routes>
+      <ShoppingCartProvider>
+        <div className="app-container relative flex min-h-screen flex-col">
+          <NavBar />
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/products" element={<Products />} />
+              <Route
+                path="/product/details/:productId"
+                element={<ProductDetails />}
+              />
+              <Route path="/mycart" element={<MyCart />} />
+              {/* <Route path="*" element={<NotFound />} /> */}
+            </Routes>
+          </div>
+          <Footer />
+          <ScrollUpButton />
         </div>
-        <Footer />
-        <ScrollUpButton />
-      </div>
+      </ShoppingCartProvider>
     </AppContext.Provider>
   );
 }
