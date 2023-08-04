@@ -57,8 +57,8 @@ export function ProductList({
           })}
         </div>
       ) : (
-        <div className="mx-4 mt-16 flex items-center justify-center">
-          <p className="text-center text-xl">No Product Found</p>
+        <div className="mt-16 flex items-center justify-center">
+          <p className="text-center text-xl">No Products Found</p>
         </div>
       )}
     </>

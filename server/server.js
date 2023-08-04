@@ -142,7 +142,7 @@ app.get('/api/product/details/:productId', async (req, res, next) => {
     if (!product)
       throw new ClientError(
         400,
-        `cannot find product with productId: ${productId}`
+        `cannot load product with productId: ${productId}`
       );
     res.status(200).json(product);
   } catch (error) {
@@ -211,18 +211,19 @@ app.get(
     try {
       const { userId } = req.user;
       const loadCartSql = `
-          select "products"."name", "products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity"
+          select "products"."productId", "products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity"
           from "products"
           join "cartedItems" on "products"."productId" = "cartedItems"."productId"
           join "carts" on "cartedItems"."cartId" = "carts"."cartId"
           join "users" on "carts"."userId" = "users"."userId"
           where "users"."userId" = $1
+          order by "cartedItems"."cartedItemId" desc;
     `;
       const loadCartParams = [userId];
       const loadCartResult = await db.query(loadCartSql, loadCartParams);
       const cartedItems = loadCartResult.rows;
       if (cartedItems.length === 0)
-        throw new ClientError(400, `no cart items found`);
+        throw new ClientError(400, `YOUR CART IS EMPTY`);
       res.status(200).json(cartedItems);
     } catch (error) {
       next(error);
