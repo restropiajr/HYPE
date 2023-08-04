@@ -1,5 +1,5 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { productDetailsFetcher, AppContext, addToCartFetcher } from '../lib';
+import { Link, useParams } from 'react-router-dom';
+import { productDetailsFetcher, ShoppingCartContext } from '../lib';
 import { useEffect, useState, useContext } from 'react';
 import {
   Accordion,
@@ -11,13 +11,10 @@ import { FaArrowLeftLong } from 'react-icons/fa6';
 
 export function ProductDetails() {
   const { productId } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState();
-  const [productError, setProductError] = useState();
-  const [addedToCart, setAddedToCart] = useState(false);
-  const [quantityError, setQuantityError] = useState();
-  const { user, token } = useContext(AppContext);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
+  const { isCartLoading } = useContext(ShoppingCartContext);
 
   useEffect(() => {
     async function loadProduct() {
@@ -25,7 +22,7 @@ export function ProductDetails() {
         const loadedProduct = await productDetailsFetcher(productId);
         setProduct(loadedProduct);
       } catch (error) {
-        setProductError(error);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -34,28 +31,12 @@ export function ProductDetails() {
     loadProduct();
   }, [productId]);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    if (!user) navigate('/login');
-    try {
-      setIsLoading(true);
-      await addToCartFetcher(event, token, productId);
-      setAddedToCart(true);
-      setQuantityError(null);
-    } catch (error) {
-      setQuantityError(error);
-      setAddedToCart(false);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  if (isLoading) {
+  if (isLoading || isCartLoading) {
     return <LoadingSpinner />;
   }
 
-  if (productError) {
-    return <ErrorMessage error={productError} />;
+  if (error) {
+    return <ErrorMessage error={error} />;
   }
 
   const { name, price, imageUrl, description, category } = product;
@@ -98,7 +79,7 @@ export function ProductDetails() {
                 <img className="w-full" src={imageUrl} alt="name" />
               </div>
               <div className="card-body flex flex-col items-center justify-center">
-                <h4 className="card-name p-2 text-xl">{name}</h4>
+                <h4 className="card-name m-2 text-xl">{name}</h4>
                 <p className="card-price mb-2 text-lg font-bold">{`$${Number(
                   price
                 ).toFixed(2)}`}</p>
@@ -107,15 +88,13 @@ export function ProductDetails() {
           </div>
         </div>
         <div className="row-two">
+          <h4 className="m-2 text-center text-xl text-red-600">
+            5 LIMIT QUANTITY PER ORDER
+          </h4>
           <Accordion accordionTopics={accordionTopics} />
         </div>
         <div className="row-three">
-          <ProductForm
-            category={category}
-            quantityError={quantityError}
-            addedToCart={addedToCart}
-            handleSubmit={handleSubmit}
-          />
+          <ProductForm category={category} productId={productId} />
         </div>
       </div>
     </>

@@ -1,54 +1,34 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import {
   AppContext,
-  cartFetcher,
+  ShoppingCartContext,
   totalCartQuantity,
   totalCartCost,
-  emptyCartFetcher,
 } from '../lib';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   LoadingSpinner,
+  ErrorMessage,
   // MyCartList,
 } from '../components';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 
 export function MyCart() {
-  const [cart, setCart] = useState();
-  const { user, token } = useContext(AppContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useContext(AppContext);
+  const { cart, isCartLoading, cartError, handleEmptyCart } =
+    useContext(ShoppingCartContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) navigate('/login');
-    async function loadCart() {
-      try {
-        const loadedCart = await cartFetcher(token);
-        setCart(loadedCart);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    setIsLoading(true);
-    loadCart();
-  }, [user, navigate, token]);
+  }, [user, navigate]);
 
-  async function handleClick(event) {
-    try {
-      setIsLoading(true);
-      await emptyCartFetcher(token);
-      setCart([]);
-    } catch (error) {
-      alert(error);
-    } finally {
-      setIsLoading(false);
-    }
+  if (isCartLoading) {
+    return <LoadingSpinner />;
   }
 
-  if (isLoading) {
-    return <LoadingSpinner />;
+  if (cartError) {
+    return <ErrorMessage error={cartError} />;
   }
 
   return (
@@ -65,35 +45,35 @@ export function MyCart() {
               </p>
             </Link>
             <h2 className="text-3xl">MY CART</h2>
-            {cart.length === 0 && (
+            {totalCartQuantity(cart) === 0 && (
               <p className="my-8 text-center text-xl">CART IS EMPTY</p>
             )}
           </div>
         </div>
-        {cart.length > 0 && (
+        {totalCartQuantity(cart) > 0 && (
           <div className="row-two">
             <div className="col-one mb-8 flex w-full justify-center">
               <div className="flex w-5/6 flex-col rounded border-2 border-black">
                 <div className="flex justify-between">
-                  <p className="p-2 text-start text-xl font-bold">
+                  <p className="p-4 text-start text-xl font-bold">
                     TOTAL NUMBER OF ITEMS
                   </p>
-                  <p className="p-2 pr-4 text-start text-xl font-bold text-red-600">
+                  <p className="p-4 text-start text-xl font-bold text-red-600">
                     {`${totalCartQuantity(cart)}`}
                   </p>
                 </div>
                 <div className="flex justify-between">
-                  <p className="p-2 text-start text-xl font-bold">
+                  <p className="p-4 text-start text-xl font-bold">
                     TOTAL COST (USD)
                   </p>
-                  <p className="p-2 pr-4 text-start text-xl font-bold text-red-600">
+                  <p className="p-4 text-start text-xl font-bold text-red-600">
                     {`$${totalCartCost(cart)}`}
                   </p>
                 </div>
                 <div className="flex justify-center">
                   <Link
                     to="https://www.google.com/"
-                    className="m-2"
+                    className="m-4"
                     target="_blank">
                     <button
                       type="button"
@@ -101,10 +81,10 @@ export function MyCart() {
                       CHECKOUT
                     </button>
                   </Link>
-                  <div className="m-2">
+                  <div className="m-4">
                     <button
                       type="button"
-                      onClick={handleClick}
+                      onClick={handleEmptyCart}
                       className="w-full rounded border-2 border-black p-4 font-bold transition duration-200 ease-in-out md:hover:bg-red-600">
                       EMPTY CART
                     </button>

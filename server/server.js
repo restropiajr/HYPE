@@ -180,7 +180,10 @@ app.post(
             throw new ClientError(400, 'Cannot add product to cart');
           res.status(200).json(cartedItem);
         } else {
-          throw new ClientError(400, '5 QUANTITY LIMIT PER ORDER');
+          throw new ClientError(
+            400,
+            'Maximum 5 quantity limit per order has been reached'
+          );
         }
       } else {
         const addToCartSql = `
