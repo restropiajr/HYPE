@@ -28,10 +28,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
-      throw new ClientError(
-        400,
-        'username, password, and email are required fields'
-      );
+      throw new ClientError(400, 'Username, Password, and Email not found');
     }
     const checkDuplicateSql = `
           select *
@@ -47,10 +44,10 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     if (duplicates.length > 0) {
       duplicates.forEach((duplicate) => {
         if (duplicate.username === username) {
-          throw new ClientError(400, 'username is already taken');
+          throw new ClientError(409, 'Username is already taken');
         }
         if (duplicate.email === email) {
-          throw new ClientError(400, 'email is already taken');
+          throw new ClientError(409, 'Email is already taken');
         }
       });
     }
@@ -75,6 +72,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
       createUserCartParams
     );
     const [cart] = createUserCartResult.rows;
+    if (!user || !cart) throw new ClientError(400, 'Cannot sign up user');
     res.status(201).json({ user, cart });
   } catch (error) {
     next(error);
@@ -85,7 +83,7 @@ app.post('/api/auth/log-in', async (req, res, next) => {
   try {
     const { username, password } = req.body;
     if (!username && !password) {
-      throw new ClientError(401, 'invalid login');
+      throw new ClientError(401, 'Invalid login information');
     }
     const logInUserSql = `
           select "users"."userId", "users"."hashedPassword", "carts"."cartId"
@@ -96,10 +94,10 @@ app.post('/api/auth/log-in', async (req, res, next) => {
     const logInUserParams = [username];
     const logInUserResult = await db.query(logInUserSql, logInUserParams);
     const [user] = logInUserResult.rows;
-    if (!user) throw new ClientError(401, 'invalid login');
+    if (!user) throw new ClientError(401, 'Invalid login information');
     const { userId, hashedPassword, cartId } = user;
     const isMatching = await argon2.verify(hashedPassword, password);
-    if (!isMatching) throw new ClientError(401, 'invalid login');
+    if (!isMatching) throw new ClientError(401, 'Invalid login information');
     const payload = { userId, username, cartId };
     const hashKey = process.env.TOKEN_SECRET;
     if (!hashKey) throw new Error('TOKEN_SECRET not found in .env');
@@ -118,8 +116,7 @@ app.get('/api/products', async (req, res, next) => {
     `;
     const loadProductsResult = await db.query(loadProductsSql);
     const products = loadProductsResult.rows;
-    if (products.length === 0)
-      throw new ClientError(400, `cannot load products`);
+    if (!products) throw new ClientError(404, `Products not found`);
     res.status(200).json(products);
   } catch (error) {
     next(error);
@@ -139,11 +136,7 @@ app.get('/api/product/details/:productId', async (req, res, next) => {
     const loadProductParams = [productId];
     const loadProductResult = await db.query(loadProductSql, loadProductParams);
     const [product] = loadProductResult.rows;
-    if (!product)
-      throw new ClientError(
-        400,
-        `cannot load product with productId: ${productId}`
-      );
+    if (!product) throw new ClientError(404, `Product not found`);
     res.status(200).json(product);
   } catch (error) {
     next(error);
@@ -183,9 +176,11 @@ app.post(
             updateQuantityParams
           );
           const [cartedItem] = updateQuantityResults.rows;
-          res.status(201).json(cartedItem);
+          if (!cartedItem)
+            throw new ClientError(400, 'Cannot add product to cart');
+          res.status(200).json(cartedItem);
         } else {
-          throw new ClientError(400, 'THERE IS A 5 QUANTITY LIMIT PER ORDER.');
+          throw new ClientError(400, '5 QUANTITY LIMIT PER ORDER');
         }
       } else {
         const addToCartSql = `
@@ -196,6 +191,8 @@ app.post(
         const addToCartParams = [cartId, productId, size, quantity];
         const addToCartResult = await db.query(addToCartSql, addToCartParams);
         const [cartedItem] = addToCartResult.rows;
+        if (!cartedItem)
+          throw new ClientError(400, 'Cannot add product to cart');
         res.status(201).json(cartedItem);
       }
     } catch (error) {
@@ -222,9 +219,28 @@ app.get(
       const loadCartParams = [userId];
       const loadCartResult = await db.query(loadCartSql, loadCartParams);
       const cartedItems = loadCartResult.rows;
-      if (cartedItems.length === 0)
-        throw new ClientError(400, `YOUR CART IS EMPTY`);
+      if (!cartedItems) throw new ClientError(404, `Carted products not found`);
       res.status(200).json(cartedItems);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+app.delete(
+  '/api/mycart/empty-cart',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { cartId } = req.user;
+      const emptyCartSql = `
+         delete
+         from "cartedItems"
+         where "cartId" = $1;
+    `;
+      const emptyCartParams = [cartId];
+      await db.query(emptyCartSql, emptyCartParams);
+      res.sendStatus(204);
     } catch (error) {
       next(error);
     }

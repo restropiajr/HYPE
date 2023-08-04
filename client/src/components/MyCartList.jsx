@@ -1,10 +1,13 @@
-// export function MyCartList({cart, onUpdate, updateError}) {
+// import { AppContext } from "../lib";
+// import { useContext } from "react";
+
+// export function MyCartList({cart}) {
 //   return (
-//     <div className="row-two flex flex-wrap">
+//     <div className="row-three flex flex-wrap">
 //       {cart.map((product) => {
 //         return (
 //           <div key={product.productId} className="col flex w-full md:w-1/4">
-//             <CartedProduct product={product} onUpdate={onUpdate} />
+//             <CartedProduct product={product} />
 //           </div>
 //         );
 //       })}
@@ -12,11 +15,13 @@
 //   );
 // }
 
-// function CartedProduct({ product, onUpdate }) {
+// function CartedProduct({ product }) {
 //   const { productId, name, price, imageUrl, size, quantity } = product;
+//   const {token} = useContext(AppContext);
 //   const [updatedQuantity, setUpdatedQuantity] = useState(quantity);
 //   const [updateError, setUpdateError] = useState();
-//   async function handleUpdate(event, productId, setUpdatedQuantity) {
+
+//   async function handleSubmit(event, productId, setUpdatedQuantity) {
 //     event.preventDefault();
 //     try {
 //       setIsLoading(true);
@@ -41,7 +46,7 @@
 //         ).toFixed(2)}`}</p>
 //         <p className="card-price pb-2 text-lg font-bold">{`SIZE: ${size}`}</p>
 //         <p className="card-price pb-2 text-lg font-bold">{`QUANTITY: ${quantity}`}</p>
-//         <form onSubmit={(event) => onUpdate(event, productId)}>
+//         <form onSubmit={handleSubmit}>
 //           <select
 //             required
 //             name="quantity"

@@ -65,7 +65,7 @@ export function ProductForm({
                   : 'cursor-pointer transition duration-200 ease-in-out md:hover:bg-red-600'
               }`}>
               <option value="">--CHOOSE A SIZE--</option>
-              <option value="one">ONE SIZE</option>
+              <option value="ONE">ONE SIZE</option>
             </select>
           ) : null}
           <h4 className="card-name m-2 text-xl">QUANTITY</h4>
@@ -101,7 +101,7 @@ export function ProductForm({
           )}
         </form>
         {addedToCart && (
-          <p className="mb-8 p-2 text-xl font-bold">ADDED TO CART!</p>
+          <p className="mb-8 p-2 text-xl font-bold">ADDED TO CART</p>
         )}
         {quantityError && (
           <p className="mb-8 p-2 text-xl font-bold">{quantityError.message}</p>
