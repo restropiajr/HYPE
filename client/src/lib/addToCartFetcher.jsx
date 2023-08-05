@@ -12,7 +12,8 @@ export async function addToCartFetcher(event, token, productId) {
     body: JSON.stringify(cart),
   };
   const res = await fetch('/api/mycart/add-to-cart', req);
-  const result = await res.json();
-  if (!res.ok) throw new Error(result.error);
-  return result;
+  if (!res.ok) {
+    const result = await res.json();
+    throw new Error(result.error);
+  }
 }

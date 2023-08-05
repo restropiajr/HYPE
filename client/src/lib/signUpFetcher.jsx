@@ -7,7 +7,8 @@ export async function signUpFetcher(event) {
     body: JSON.stringify(userData),
   };
   const res = await fetch('/api/auth/sign-up', req);
-  const result = await res.json();
-  if (!res.ok) throw new Error(result.error);
-  return result;
+  if (!res.ok) {
+    const result = await res.json();
+    throw new Error(result.error);
+  }
 }

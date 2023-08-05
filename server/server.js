@@ -60,6 +60,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     const signUpUserParams = [username, hashedPassword, email];
     const signUpUserResult = await db.query(signUpUserSql, signUpUserParams);
     const [user] = signUpUserResult.rows;
+    if (!user) throw new ClientError(400, 'Cannot sign up user');
     const { userId } = user;
     const createUserCartSql = `
           insert into "carts" ("userId")
@@ -72,8 +73,8 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
       createUserCartParams
     );
     const [cart] = createUserCartResult.rows;
-    if (!user || !cart) throw new ClientError(400, 'Cannot sign up user');
-    res.status(201).json({ user, cart });
+    if (!cart) throw new ClientError(400, 'Cannot sign up user');
+    res.sendStatus(201);
   } catch (error) {
     next(error);
   }
@@ -126,7 +127,7 @@ app.get('/api/products', async (req, res, next) => {
 app.get('/api/product/details/:productId', async (req, res, next) => {
   try {
     const productId = Number(req.params.productId);
-    if (Number(productId) < 0)
+    if (productId < 0)
       throw new ClientError(400, 'productId must be a positive integer');
     const loadProductSql = `
           select "productId", "name", "category", "price", "description", "imageUrl"
@@ -178,7 +179,7 @@ app.post(
           const [cartedItem] = updateQuantityResults.rows;
           if (!cartedItem)
             throw new ClientError(400, 'Cannot add product to cart');
-          res.status(200).json(cartedItem);
+          res.sendStatus(200);
         } else {
           throw new ClientError(
             400,
@@ -196,7 +197,7 @@ app.post(
         const [cartedItem] = addToCartResult.rows;
         if (!cartedItem)
           throw new ClientError(400, 'Cannot add product to cart');
-        res.status(201).json(cartedItem);
+        res.sendStatus(201);
       }
     } catch (error) {
       next(error);
@@ -211,7 +212,7 @@ app.get(
     try {
       const { userId } = req.user;
       const loadCartSql = `
-          select "products"."productId", "products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity"
+          select "products"."productId", "products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity", "cartedItems"."cartedItemId"
           from "products"
           join "cartedItems" on "products"."productId" = "cartedItems"."productId"
           join "carts" on "cartedItems"."cartId" = "carts"."cartId"
@@ -245,8 +246,8 @@ app.put(
             set "quantity" = $1
             where "productId" = $2 and "size" = $3 and "cartId" = $4;
       `;
-      const updatedQuantityParams = [quantity, productId, size, cartId];
-      await db.query(updateQuantitySql, updatedQuantityParams);
+      const updateQuantityParams = [quantity, productId, size, cartId];
+      await db.query(updateQuantitySql, updateQuantityParams);
       res.sendStatus(200);
     } catch (error) {
       next(error);
@@ -261,13 +262,13 @@ app.delete(
     try {
       const { cartId } = req.user;
       const { productId, size } = req.body;
-      const emptyCartSql = `
+      const removeProductSql = `
          delete
          from "cartedItems"
          where "cartId" = $1 and "productId" = $2 and "size" = $3;
     `;
-      const emptyCartParams = [cartId, productId, size];
-      await db.query(emptyCartSql, emptyCartParams);
+      const removeProductParams = [cartId, productId, size];
+      await db.query(removeProductSql, removeProductParams);
       res.sendStatus(204);
     } catch (error) {
       next(error);
