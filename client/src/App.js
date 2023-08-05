@@ -22,14 +22,18 @@ export default function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const auth = localStorage.getItem(tokenKey);
-    if (auth) {
-      const authParsed = JSON.parse(auth);
-      const { user, token } = authParsed;
-      setUser(user);
-      setToken(token);
+    function loadUser() {
+      const auth = localStorage.getItem(tokenKey);
+      if (auth) {
+        const authParsed = JSON.parse(auth);
+        const { user, token } = authParsed;
+        setUser(user);
+        setToken(token);
+      }
+      setIsAuthorizing(false);
     }
-    setIsAuthorizing(false);
+    setIsAuthorizing(true);
+    loadUser();
   }, []);
 
   if (isAuthorizing) {

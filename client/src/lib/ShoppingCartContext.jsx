@@ -35,7 +35,10 @@ export function ShoppingCartProvider({ children }) {
 
   async function handleAddToCart(event, productId) {
     event.preventDefault();
-    if (!user) navigate('/login');
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     try {
       setIsCartLoading(true);
       await addToCartFetcher(event, token, productId);
