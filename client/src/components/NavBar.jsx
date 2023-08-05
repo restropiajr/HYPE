@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { FaBars, FaCartShopping } from 'react-icons/fa6';
 import { useState, useContext } from 'react';
-import { AppContext } from '../lib/AppContext';
+import { AppContext, ShoppingCartContext, totalCartQuantity } from '../lib';
 
 export function NavBar() {
   const [isSideMenuOpen, setisSideMenuOpen] = useState(false);
   const { user, handleSignOut } = useContext(AppContext);
+  const { cart } = useContext(ShoppingCartContext);
 
   function openSideMenu() {
     setisSideMenuOpen(true);
@@ -27,15 +28,22 @@ export function NavBar() {
       <nav className="navbar-container w-full">
         <div className="row-one">
           <div className="col-one fixed left-0 top-0 z-10 flex w-full items-center justify-between bg-white">
-            <div className="m-4 cursor-pointer" onClick={() => openSideMenu()}>
+            <div
+              className="m-4 cursor-pointer rounded p-2 transition duration-200 ease-in-out md:hover:bg-red-600"
+              onClick={() => openSideMenu()}>
               <FaBars size={30} color="black" />
             </div>
             <Link to="/">
               <h1 className="m-4 cursor-pointer text-5xl">HYPE</h1>
             </Link>
             <Link to="/mycart">
-              <div className="m-4">
+              <div className="relative m-4 rounded p-2 transition duration-200 ease-in-out md:hover:bg-red-600">
                 <FaCartShopping size={30} color="black" />
+                {user && totalCartQuantity(cart) > 0 && (
+                  <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-black bg-red-600 p-1 text-xs text-white">
+                    <p>{totalCartQuantity(cart)}</p>
+                  </div>
+                )}
               </div>
             </Link>
           </div>

@@ -9,12 +9,14 @@ export function Footer() {
             <div className="flex flex-col items-center">
               <h2 className="m-2 text-center text-xl text-white">FOLLOW US</h2>
               <div className="flex justify-center">
-                <Link to="https://github.com/restropiajr/HYPE">
+                <Link to="https://github.com/restropiajr/HYPE" target="_blank">
                   <div className="img-wrapper m-2 w-5">
                     <img src="/images/github-logo.png" alt="github-logo" />
                   </div>
                 </Link>
-                <Link to="https://www.linkedin.com/in/restropiajr/">
+                <Link
+                  to="https://www.linkedin.com/in/restropiajr/"
+                  target="_blank">
                   <div className="img-wrapper m-2 w-5">
                     <img
                       className="w-full"

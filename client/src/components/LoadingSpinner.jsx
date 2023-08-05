@@ -2,7 +2,7 @@ import { Vortex } from 'react-loader-spinner';
 
 export function LoadingSpinner() {
   return (
-    <div className="fixed left-[50%] top-[30%] -translate-x-1/2 -translate-y-1/2">
+    <div className="fixed left-[50%] top-[40%] -translate-x-1/2 -translate-y-1/2">
       <Vortex
         visible={true}
         height="150"

@@ -1,8 +1,8 @@
-export async function addToCartFetcher(event, cartId, token, productId) {
+export async function addToCartFetcher(event, token, productId) {
   const formData = new FormData(event.target);
   const cartData = Object.fromEntries(formData.entries());
   const { size, quantity } = cartData;
-  const cart = { size, quantity, cartId, productId };
+  const cart = { size, quantity, productId };
   const req = {
     method: 'POST',
     headers: {

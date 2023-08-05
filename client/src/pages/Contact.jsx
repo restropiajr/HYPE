@@ -7,7 +7,7 @@ export function Contact() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
-    }, 50000);
+    }, 500);
     return () => clearTimeout(timeoutId);
   }, []);
 

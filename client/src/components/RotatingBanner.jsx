@@ -13,7 +13,7 @@ export function RotatingBanner() {
       src: '/images/palace-carousel.png',
     },
     {
-      src: '/images/jordansupreme-carousel.jpg',
+      src: '/images/nike-carousel.png',
     },
     {
       src: '/images/stussy-carousel.png',

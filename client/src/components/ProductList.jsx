@@ -42,16 +42,26 @@ export function ProductList({
     copyProducts = searchByComparison();
   }
 
+  const productsFound = copyProducts.length > 0;
+
   return (
-    <div className="row-three flex flex-wrap">
-      {copyProducts.map((product) => {
-        return (
-          <div key={product.productId} className="col flex w-full md:w-1/4">
-            <Product product={product} />
-          </div>
-        );
-      })}
-    </div>
+    <>
+      {productsFound ? (
+        <div className="row-three flex flex-wrap">
+          {copyProducts.map((product) => {
+            return (
+              <div key={product.productId} className="col flex w-full md:w-1/4">
+                <Product product={product} />
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="mt-16 flex items-center justify-center">
+          <p className="text-center text-xl">No Products Found</p>
+        </div>
+      )}
+    </>
   );
 }
 

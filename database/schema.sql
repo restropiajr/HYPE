@@ -24,6 +24,7 @@ CREATE TABLE "public"."products" (
 	"price" DECIMAL NOT NULL,
 	"description" TEXT NOT NULL,
 	"imageUrl" TEXT NOT NULL,
+	"size" TEXT NOT NULL,
 	CONSTRAINT "products_pk" PRIMARY KEY ("productId")
 ) WITH (
   OIDS=FALSE
