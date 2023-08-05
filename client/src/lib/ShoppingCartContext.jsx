@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { cartFetcher } from './cartFetcher';
 import { addToCartFetcher } from './addToCartFetcher';
 import { emptyCartFetcher } from './emptyCartFetcher';
+import { updateQuantityFetcher } from './updateQuantityFetcher';
+import { removeProductFetcher } from './removeProductFetcher';
 import { AppContext } from './AppContext';
 
 export const ShoppingCartContext = createContext();
@@ -52,6 +54,31 @@ export function ShoppingCartProvider({ children }) {
     }
   }
 
+  async function handleUpdateQuantity(event, productId, size) {
+    event.preventDefault();
+    try {
+      setIsCartLoading(true);
+      await updateQuantityFetcher(event, token, productId, size);
+      await loadCart(token);
+    } catch (error) {
+      alert(error);
+    } finally {
+      setIsCartLoading(false);
+    }
+  }
+
+  async function handleRemoveProduct(productId, size) {
+    try {
+      setIsCartLoading(true);
+      await removeProductFetcher(token, productId, size);
+      await loadCart(token);
+    } catch (error) {
+      alert(error);
+    } finally {
+      setIsCartLoading(false);
+    }
+  }
+
   async function handleEmptyCart() {
     try {
       setIsCartLoading(true);
@@ -70,6 +97,8 @@ export function ShoppingCartProvider({ children }) {
     cartError,
     handleAddToCart,
     handleEmptyCart,
+    handleUpdateQuantity,
+    handleRemoveProduct,
   };
 
   return (

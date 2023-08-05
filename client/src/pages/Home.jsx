@@ -20,8 +20,8 @@ export function Home() {
     <>
       <div className="home-container w-full ">
         <div className="row-one">
-          <div className="col-one mb-8 mt-24 w-full">
-            <h2 className="text-center text-3xl md:text-6xl">
+          <div className="col-one mb-8 mt-24 flex w-full justify-center">
+            <h2 className="rounded bg-red-600 p-2 text-center text-3xl md:text-6xl">
               FEATURED STREETWEAR BRANDS
             </h2>
           </div>

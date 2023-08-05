@@ -6,11 +6,7 @@ import {
   totalCartCost,
 } from '../lib';
 import { useNavigate, Link } from 'react-router-dom';
-import {
-  LoadingSpinner,
-  ErrorMessage,
-  // MyCartList,
-} from '../components';
+import { LoadingSpinner, ErrorMessage, MyCartList } from '../components';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 
 export function MyCart() {
@@ -94,7 +90,7 @@ export function MyCart() {
             </div>
           </div>
         )}
-        {/* <MyCartList cart={cart} /> */}
+        <MyCartList />
       </div>
     </>
   );

@@ -182,7 +182,7 @@ app.post(
         } else {
           throw new ClientError(
             400,
-            'Maximum 5 quantity limit per order has been reached'
+            'The maximum quantity limit of 5 per order has been reached'
           );
         }
       } else {
@@ -224,6 +224,51 @@ app.get(
       const cartedItems = loadCartResult.rows;
       if (!cartedItems) throw new ClientError(404, `Carted products not found`);
       res.status(200).json(cartedItems);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+app.put(
+  '/api/mycart/update-quantity',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { productId, size, quantity } = req.body;
+      const { cartId } = req.user;
+      if (!productId || !size || !quantity) {
+        throw new ClientError(400, 'Product ID, size, and quantity not found');
+      }
+      const updateQuantitySql = `
+            update "cartedItems"
+            set "quantity" = $1
+            where "productId" = $2 and "size" = $3 and "cartId" = $4;
+      `;
+      const updatedQuantityParams = [quantity, productId, size, cartId];
+      await db.query(updateQuantitySql, updatedQuantityParams);
+      res.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+app.delete(
+  '/api/mycart/remove-product',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { cartId } = req.user;
+      const { productId, size } = req.body;
+      const emptyCartSql = `
+         delete
+         from "cartedItems"
+         where "cartId" = $1 and "productId" = $2 and "size" = $3;
+    `;
+      const emptyCartParams = [cartId, productId, size];
+      await db.query(emptyCartSql, emptyCartParams);
+      res.sendStatus(204);
     } catch (error) {
       next(error);
     }
