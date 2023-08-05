@@ -49,7 +49,7 @@ export function MyCart() {
         {totalCartQuantity(cart) > 0 && (
           <div className="row-two">
             <div className="col-one mb-8 flex w-full justify-center">
-              <div className="flex w-5/6 flex-col rounded border-2 border-black md:w-1/6">
+              <div className="flex w-5/6 flex-col rounded border-2 border-black md:w-2/6">
                 <div className="flex justify-between">
                   <p className="p-4 text-start text-xl font-bold">
                     TOTAL NUMBER OF ITEMS

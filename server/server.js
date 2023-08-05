@@ -28,7 +28,10 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
-      throw new ClientError(400, 'Username, Password, and Email not found');
+      throw new ClientError(
+        400,
+        'Username, Password, and Email are required fields'
+      );
     }
     const checkDuplicateSql = `
           select *
@@ -127,8 +130,9 @@ app.get('/api/products', async (req, res, next) => {
 app.get('/api/product/details/:productId', async (req, res, next) => {
   try {
     const productId = Number(req.params.productId);
+    if (!productId) throw new ClientError(400, 'ProductId is a required field');
     if (productId < 0)
-      throw new ClientError(400, 'productId must be a positive integer');
+      throw new ClientError(400, 'ProductId must be a positive integer');
     const loadProductSql = `
           select "productId", "name", "category", "price", "description", "imageUrl"
           from "products"
@@ -150,7 +154,16 @@ app.post(
   async (req, res, next) => {
     try {
       const { productId, size, quantity } = req.body;
+      if (!productId || !size || !quantity) {
+        throw new ClientError(
+          400,
+          'ProductId, Size, and Quantity are required fields'
+        );
+      }
       const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
       const checkPrevQuantitySql = `
             select *
             from "cartedItems"
@@ -211,8 +224,11 @@ app.get(
   async (req, res, next) => {
     try {
       const { userId } = req.user;
+      if (!userId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
       const loadCartSql = `
-          select "products"."productId", "products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity", "cartedItems"."cartedItemId"
+          select "products"."productId", "products"."name","products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity", "cartedItems"."cartedItemId"
           from "products"
           join "cartedItems" on "products"."productId" = "cartedItems"."productId"
           join "carts" on "cartedItems"."cartId" = "carts"."cartId"
@@ -237,9 +253,15 @@ app.put(
   async (req, res, next) => {
     try {
       const { productId, size, quantity } = req.body;
-      const { cartId } = req.user;
       if (!productId || !size || !quantity) {
-        throw new ClientError(400, 'Product ID, size, and quantity not found');
+        throw new ClientError(
+          400,
+          'Product ID, size, and quantity are required fields'
+        );
+      }
+      const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
       }
       const updateQuantitySql = `
             update "cartedItems"
@@ -261,7 +283,13 @@ app.delete(
   async (req, res, next) => {
     try {
       const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
       const { productId, size } = req.body;
+      if (!productId || !size) {
+        throw new ClientError(400, 'Product ID and size are required fields');
+      }
       const removeProductSql = `
          delete
          from "cartedItems"
@@ -282,6 +310,9 @@ app.delete(
   async (req, res, next) => {
     try {
       const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
       const emptyCartSql = `
          delete
          from "cartedItems"

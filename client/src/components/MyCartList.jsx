@@ -20,6 +20,7 @@ export function MyCartList() {
 
 function CartedProduct({ product }) {
   const { productId, name, price, imageUrl, size, quantity } = product;
+  console.log(product);
   const { handleUpdateQuantity, handleRemoveProduct } =
     useContext(ShoppingCartContext);
 
