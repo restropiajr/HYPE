@@ -6,3 +6,4 @@ export * from './Products';
 export * from './ProductDetails';
 export * from './MyCart';
 export * from './CheckoutSuccess';
+export * from './NotFound';

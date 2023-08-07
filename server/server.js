@@ -365,7 +365,7 @@ app.post(
               unit_amount: Math.round(Number(item.price) * 100),
               product_data: {
                 name: `${item.name} (Size: ${item.size})`,
-                images: [`${process.env.IMAGE_URL}${item.imageUrl}`],
+                images: [`${process.env.BASE_URL}${item.imageUrl}`],
               },
             },
             quantity: item.quantity,
