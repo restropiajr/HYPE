@@ -360,16 +360,23 @@ app.post(
         mode: 'payment',
         line_items: checkOutCart.map((item) => {
           const stripeLineItem = {
-            name: `${item.name} (Size: ${item.size})`,
-            amount: Number(item.price) * 100,
-            currency: 'usd',
+            price_data: {
+              currency: 'usd',
+              unit_amount: Math.round(Number(item.price) * 100),
+              product_data: {
+                name: `${item.name} (Size: ${item.size})`,
+                images: [`${process.env.IMAGE_URL}${item.imageUrl}`],
+              },
+            },
             quantity: item.quantity,
-            images: [item.imageUrl],
           };
           return stripeLineItem;
         }),
-        success_url: '/checkout/success',
-        cancel_url: '/checkout/cancel',
+        success_url: `${process.env.BASE_URL}/checkout/success`,
+        cancel_url: `${process.env.BASE_URL}/mycart`,
+        shipping_address_collection: {
+          allowed_countries: ['US'],
+        },
       });
       res.status(200).json({ url: session.url });
     } catch (error) {
