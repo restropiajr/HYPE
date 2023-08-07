@@ -360,11 +360,10 @@ app.post(
         mode: 'payment',
         line_items: checkOutCart.map((item) => {
           const stripeLineItem = {
-            name: item.name,
+            name: `${item.name} (Size: ${item.size})`,
             amount: Number(item.price) * 100,
             currency: 'usd',
             quantity: item.quantity,
-            size: item.size,
             images: [item.imageUrl],
           };
           return stripeLineItem;
