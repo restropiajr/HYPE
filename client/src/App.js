@@ -8,6 +8,8 @@ import {
   Products,
   ProductDetails,
   MyCart,
+  CheckoutSuccess,
+  CheckoutCancel,
 } from './pages';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -74,6 +76,8 @@ export default function App() {
                 element={<ProductDetails />}
               />
               <Route path="/mycart" element={<MyCart />} />
+              <Route path="/checkout/success" element={<CheckoutSuccess />} />
+              <Route path="/checkout/cancel" element={<CheckoutCancel />} />
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
           </div>

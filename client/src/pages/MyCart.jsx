@@ -16,12 +16,15 @@ export function MyCart() {
     isCartLoading,
     cartError,
     handleEmptyCart,
+    handleCheckOut,
     updateQuantityError,
     setUpdateQuantityError,
     removeProductError,
     setRemoveProductError,
     emptyCartError,
     setEmptyCartError,
+    checkOutError,
+    setCheckOutError,
   } = useContext(ShoppingCartContext);
   const navigate = useNavigate();
 
@@ -30,12 +33,14 @@ export function MyCart() {
     setUpdateQuantityError(null);
     setRemoveProductError(null);
     setEmptyCartError(null);
+    setCheckOutError(null);
   }, [
     user,
     navigate,
     setUpdateQuantityError,
     setRemoveProductError,
     setEmptyCartError,
+    setCheckOutError,
   ]);
 
   if (isCartLoading) {
@@ -61,7 +66,10 @@ export function MyCart() {
             </Link>
             <h2
               className={`text-3xl ${
-                updateQuantityError || removeProductError || emptyCartError
+                updateQuantityError ||
+                removeProductError ||
+                emptyCartError ||
+                checkOutError
                   ? 'mb-8'
                   : 'mb-0'
               }`}>
@@ -77,14 +85,21 @@ export function MyCart() {
             {removeProductError && (
               <div className="flex w-full items-center justify-center md:w-1/3">
                 <p className="mx-8 mb-8 text-justify text-xl text-red-600 md:mx-0">
-                  ERROR: {updateQuantityError.message}
+                  ERROR: {removeProductError.message}
                 </p>
               </div>
             )}
             {emptyCartError && (
               <div className="flex w-full items-center justify-center md:w-1/3">
                 <p className="mx-8 text-justify text-xl text-red-600 md:mx-0">
-                  ERROR: {updateQuantityError.message}
+                  ERROR: {emptyCartError.message}
+                </p>
+              </div>
+            )}
+            {checkOutError && (
+              <div className="flex w-full items-center justify-center md:w-1/3">
+                <p className="mx-8 text-justify text-xl text-red-600 md:mx-0">
+                  ERROR: {checkOutError.message}
                 </p>
               </div>
             )}
@@ -113,25 +128,19 @@ export function MyCart() {
                     {`$${totalCartCost(cart)}`}
                   </p>
                 </div>
-                <div className="flex justify-center">
-                  <Link
-                    to="https://www.google.com/"
-                    className="m-4"
-                    target="_blank">
-                    <button
-                      type="button"
-                      className="w-full rounded border-2 border-black p-4 font-bold transition duration-200 ease-in-out md:hover:bg-red-600">
-                      CHECKOUT
-                    </button>
-                  </Link>
-                  <div className="m-4">
-                    <button
-                      type="button"
-                      onClick={handleEmptyCart}
-                      className="w-full rounded border-2 border-black p-4 font-bold transition duration-200 ease-in-out md:hover:bg-red-600">
-                      EMPTY CART
-                    </button>
-                  </div>
+                <div className="flex items-center justify-center">
+                  <button
+                    onClick={handleCheckOut}
+                    type="button"
+                    className="m-4 w-full rounded border-2 border-black p-4 font-bold transition duration-200 ease-in-out md:hover:bg-red-600">
+                    CHECKOUT
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleEmptyCart}
+                    className="m-0 my-4 mr-4 w-full rounded border-2 border-black p-4 font-bold transition duration-200 ease-in-out md:hover:bg-red-600">
+                    EMPTY CART
+                  </button>
                 </div>
               </div>
             </div>

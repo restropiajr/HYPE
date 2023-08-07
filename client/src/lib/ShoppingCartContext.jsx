@@ -5,6 +5,7 @@ import { addToCartFetcher } from './addToCartFetcher';
 import { emptyCartFetcher } from './emptyCartFetcher';
 import { updateQuantityFetcher } from './updateQuantityFetcher';
 import { removeProductFetcher } from './removeProductFetcher';
+import { checkOutFetcher } from './checkOutFetcher';
 import { AppContext } from './AppContext';
 
 export const ShoppingCartContext = createContext();
@@ -18,6 +19,7 @@ export function ShoppingCartProvider({ children }) {
   const [updateQuantityError, setUpdateQuantityError] = useState(true);
   const [removeProductError, setRemoveProductError] = useState(true);
   const [emptyCartError, setEmptyCartError] = useState(true);
+  const [checkOutError, setCheckOutError] = useState(true);
   const navigate = useNavigate();
 
   async function loadCart(token) {
@@ -94,6 +96,19 @@ export function ShoppingCartProvider({ children }) {
     }
   }
 
+  async function handleCheckOut() {
+    try {
+      setIsCartLoading(true);
+      const session = await checkOutFetcher(token);
+      const { url } = session;
+      window.location = url;
+    } catch (error) {
+      setCheckOutError(error);
+    } finally {
+      setIsCartLoading(false);
+    }
+  }
+
   const contextValue = {
     cart,
     isCartLoading,
@@ -110,6 +125,9 @@ export function ShoppingCartProvider({ children }) {
     handleEmptyCart,
     emptyCartError,
     setEmptyCartError,
+    handleCheckOut,
+    checkOutError,
+    setCheckOutError,
   };
 
   return (

@@ -10,3 +10,4 @@ export * from './emptyCartFetcher';
 export * from './updateQuantityFetcher';
 export * from './ShoppingCartContext';
 export * from './removeProductFetcher';
+export * from './checkOutFetcher';

@@ -8,6 +8,7 @@ import {
   errorMiddleware,
   authorizationMiddleware,
 } from './lib/index.js';
+import Stripe from 'stripe';
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -16,12 +17,15 @@ const db = new pg.Pool({
   },
 });
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
 const app = express();
 
 // Create paths for static directories
 const reactStaticDir = new URL('../client/build', import.meta.url).pathname;
 
 app.use(express.static(reactStaticDir));
+
 app.use(express.json());
 
 app.post('/api/auth/sign-up', async (req, res, next) => {
@@ -321,6 +325,54 @@ app.delete(
       const emptyCartParams = [cartId];
       await db.query(emptyCartSql, emptyCartParams);
       res.sendStatus(204);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+app.post(
+  `/api/mycart/check-out-cart`,
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { userId } = req.user;
+      if (!userId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
+      const checkOutCartSql = `
+          select "products"."name","products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity"
+          from "products"
+          join "cartedItems" on "products"."productId" = "cartedItems"."productId"
+          join "carts" on "cartedItems"."cartId" = "carts"."cartId"
+          join "users" on "carts"."userId" = "users"."userId"
+          where "users"."userId" = $1
+          order by "cartedItems"."cartedItemId" desc;
+    `;
+      const checkOutCartParams = [userId];
+      const checkOutCartResult = await db.query(
+        checkOutCartSql,
+        checkOutCartParams
+      );
+      const checkOutCart = checkOutCartResult.rows;
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        line_items: checkOutCart.map((item) => {
+          const stripeLineItem = {
+            name: item.name,
+            amount: Number(item.price) * 100,
+            currency: 'usd',
+            quantity: item.quantity,
+            size: item.size,
+            images: [item.imageUrl],
+          };
+          return stripeLineItem;
+        }),
+        success_url: '/checkout/success',
+        cancel_url: '/checkout/cancel',
+      });
+      res.status(200).json({ url: session.url });
     } catch (error) {
       next(error);
     }
