@@ -68,8 +68,8 @@ export function ProductList({
 function Product({ product }) {
   const { productId, name, price, imageUrl } = product;
   return (
-    <Link to={`/product/details/${productId}`}>
-      <div className="card-wrapper group m-8">
+    <div className="card-wrapper group m-8">
+      <Link to={`/product/details/${productId}`}>
         <div className="img-wrapper w-full">
           <img className="w-full" src={imageUrl} alt="name" />
         </div>
@@ -81,7 +81,7 @@ function Product({ product }) {
             price
           ).toFixed(2)}`}</p>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

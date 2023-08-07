@@ -14,13 +14,17 @@ export function ShoppingCartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [isCartLoading, setIsCartLoading] = useState(true);
   const [cartError, setCartError] = useState();
+  const [addToCartError, setAddToCartError] = useState();
+  const [updateQuantityError, setUpdateQuantityError] = useState(true);
+  const [removeProductError, setRemoveProductError] = useState(true);
+  const [emptyCartError, setEmptyCartError] = useState(true);
   const navigate = useNavigate();
 
   async function loadCart(token) {
     try {
+      setIsCartLoading(true);
       const loadedCart = await cartFetcher(token);
       setCart(loadedCart);
-      setCartError(null);
     } catch (error) {
       setCartError(error);
     } finally {
@@ -30,7 +34,7 @@ export function ShoppingCartProvider({ children }) {
 
   useEffect(() => {
     if (user) {
-      setIsCartLoading(true);
+      setCartError(null);
       loadCart(token);
     }
   }, [user, token]);
@@ -47,8 +51,7 @@ export function ShoppingCartProvider({ children }) {
       await loadCart(token);
       navigate('/mycart');
     } catch (error) {
-      alert(error);
-      navigate('/mycart');
+      setAddToCartError(error);
     } finally {
       setIsCartLoading(false);
     }
@@ -61,7 +64,7 @@ export function ShoppingCartProvider({ children }) {
       await updateQuantityFetcher(event, token, productId, size);
       await loadCart(token);
     } catch (error) {
-      alert(error);
+      setUpdateQuantityError(error);
     } finally {
       setIsCartLoading(false);
     }
@@ -73,7 +76,7 @@ export function ShoppingCartProvider({ children }) {
       await removeProductFetcher(token, productId, size);
       await loadCart(token);
     } catch (error) {
-      alert(error);
+      setRemoveProductError(error);
     } finally {
       setIsCartLoading(false);
     }
@@ -85,7 +88,7 @@ export function ShoppingCartProvider({ children }) {
       await emptyCartFetcher(token);
       await loadCart(token);
     } catch (error) {
-      alert(error);
+      setEmptyCartError(error);
     } finally {
       setIsCartLoading(false);
     }
@@ -96,9 +99,17 @@ export function ShoppingCartProvider({ children }) {
     isCartLoading,
     cartError,
     handleAddToCart,
-    handleEmptyCart,
+    addToCartError,
+    setAddToCartError,
     handleUpdateQuantity,
+    updateQuantityError,
+    setUpdateQuantityError,
     handleRemoveProduct,
+    removeProductError,
+    setRemoveProductError,
+    handleEmptyCart,
+    emptyCartError,
+    setEmptyCartError,
   };
 
   return (

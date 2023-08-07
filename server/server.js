@@ -148,6 +148,35 @@ app.get('/api/product/details/:productId', async (req, res, next) => {
   }
 });
 
+app.get(
+  '/api/mycart/load-cart',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { userId } = req.user;
+      if (!userId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
+      const loadCartSql = `
+          select "products"."productId", "products"."name","products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity", "cartedItems"."cartedItemId"
+          from "products"
+          join "cartedItems" on "products"."productId" = "cartedItems"."productId"
+          join "carts" on "cartedItems"."cartId" = "carts"."cartId"
+          join "users" on "carts"."userId" = "users"."userId"
+          where "users"."userId" = $1
+          order by "cartedItems"."cartedItemId" desc;
+    `;
+      const loadCartParams = [userId];
+      const loadCartResult = await db.query(loadCartSql, loadCartParams);
+      const cartedItems = loadCartResult.rows;
+      if (!cartedItems) throw new ClientError(404, `Carted products not found`);
+      res.status(200).json(cartedItems);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 app.post(
   '/api/mycart/add-to-cart',
   authorizationMiddleware,
@@ -196,7 +225,7 @@ app.post(
         } else {
           throw new ClientError(
             400,
-            'The maximum quantity limit of 5 per order has been reached'
+            'The selected quantity for this size has either reached or will reach the maximum limit of 5 items per order'
           );
         }
       } else {
@@ -212,35 +241,6 @@ app.post(
           throw new ClientError(400, 'Cannot add product to cart');
         res.sendStatus(201);
       }
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-app.get(
-  '/api/mycart/load-cart',
-  authorizationMiddleware,
-  async (req, res, next) => {
-    try {
-      const { userId } = req.user;
-      if (!userId) {
-        throw new ClientError(401, 'Invalid user information');
-      }
-      const loadCartSql = `
-          select "products"."productId", "products"."name","products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity", "cartedItems"."cartedItemId"
-          from "products"
-          join "cartedItems" on "products"."productId" = "cartedItems"."productId"
-          join "carts" on "cartedItems"."cartId" = "carts"."cartId"
-          join "users" on "carts"."userId" = "users"."userId"
-          where "users"."userId" = $1
-          order by "cartedItems"."cartedItemId" desc;
-    `;
-      const loadCartParams = [userId];
-      const loadCartResult = await db.query(loadCartSql, loadCartParams);
-      const cartedItems = loadCartResult.rows;
-      if (!cartedItems) throw new ClientError(404, `Carted products not found`);
-      res.status(200).json(cartedItems);
     } catch (error) {
       next(error);
     }

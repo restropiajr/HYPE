@@ -14,11 +14,12 @@ export function ProductDetails() {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const { isCartLoading } = useContext(ShoppingCartContext);
+  const { setAddToCartError } = useContext(ShoppingCartContext);
 
   useEffect(() => {
     async function loadProduct() {
       try {
+        setIsLoading(true);
         const loadedProduct = await productDetailsFetcher(productId);
         setProduct(loadedProduct);
       } catch (error) {
@@ -27,11 +28,11 @@ export function ProductDetails() {
         setIsLoading(false);
       }
     }
-    setIsLoading(true);
+    setAddToCartError(null);
     loadProduct();
-  }, [productId]);
+  }, [productId, setAddToCartError]);
 
-  if (isLoading || isCartLoading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -89,7 +90,7 @@ export function ProductDetails() {
         </div>
         <div className="row-two">
           <h4 className="m-2 text-center text-xl text-red-600">
-            5 LIMIT QUANTITY PER ORDER
+            MAXIMUM LIMIT OF 5 ITEMS PER ORDER
           </h4>
           <Accordion accordionTopics={accordionTopics} />
         </div>

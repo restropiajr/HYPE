@@ -1,6 +1,8 @@
 import { ShoppingCartContext } from '../lib';
 import { useContext } from 'react';
 import { FaXmark } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export function MyCartList() {
   const { cart } = useContext(ShoppingCartContext);
@@ -22,14 +24,19 @@ function CartedProduct({ product }) {
   const { productId, name, price, imageUrl, size, quantity } = product;
   const { handleUpdateQuantity, handleRemoveProduct } =
     useContext(ShoppingCartContext);
+  const [showUpdateButton, setShowUpdateButton] = useState(false);
 
   return (
     <div className="card-wrapper group relative m-8">
       <div className="img-wrapper w-full">
-        <img className="w-full" src={imageUrl} alt="name" />
+        <Link to={`/product/details/${productId}`}>
+          <img className="w-full" src={imageUrl} alt="name" />
+        </Link>
       </div>
       <div className="card-body flex flex-col items-center justify-center">
-        <h4 className="card-name rounded p-2 text-xl">{name}</h4>
+        <h4 className="card-name rounded p-2 text-xl transition duration-200 ease-in-out md:group-hover:bg-red-600">
+          {name}
+        </h4>
         <p className="card-price pb-2 text-lg font-bold">{`$${Number(
           price
         ).toFixed(2)}`}</p>
@@ -39,6 +46,7 @@ function CartedProduct({ product }) {
           onSubmit={(event) => handleUpdateQuantity(event, productId, size)}>
           <select
             required
+            onChange={(event) => setShowUpdateButton(event.target.value !== '')}
             name="quantity"
             className="w-full cursor-pointer rounded border-2 border-black text-center text-xs font-bold transition duration-200 ease-in-out md:hover:bg-red-600">
             <option value="">--UPDATE QUANTITY--</option>
@@ -48,11 +56,13 @@ function CartedProduct({ product }) {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button
-            type="submit"
-            className="mb-8 mt-4 block w-full rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
-            UPDATE
-          </button>
+          {showUpdateButton && (
+            <button
+              type="submit"
+              className="mt-4 block w-full rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
+              UPDATE
+            </button>
+          )}
         </form>
       </div>
       <button

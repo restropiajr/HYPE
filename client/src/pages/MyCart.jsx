@@ -11,13 +11,32 @@ import { FaArrowLeftLong } from 'react-icons/fa6';
 
 export function MyCart() {
   const { user } = useContext(AppContext);
-  const { cart, isCartLoading, cartError, handleEmptyCart } =
-    useContext(ShoppingCartContext);
+  const {
+    cart,
+    isCartLoading,
+    cartError,
+    handleEmptyCart,
+    updateQuantityError,
+    setUpdateQuantityError,
+    removeProductError,
+    setRemoveProductError,
+    emptyCartError,
+    setEmptyCartError,
+  } = useContext(ShoppingCartContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) navigate('/login');
-  }, [user, navigate]);
+    setUpdateQuantityError(null);
+    setRemoveProductError(null);
+    setEmptyCartError(null);
+  }, [
+    user,
+    navigate,
+    setUpdateQuantityError,
+    setRemoveProductError,
+    setEmptyCartError,
+  ]);
 
   if (isCartLoading) {
     return <LoadingSpinner />;
@@ -40,7 +59,35 @@ export function MyCart() {
                 BACK TO PRODUCTS
               </p>
             </Link>
-            <h2 className="text-3xl">MY CART</h2>
+            <h2
+              className={`text-3xl ${
+                updateQuantityError || removeProductError || emptyCartError
+                  ? 'mb-8'
+                  : 'mb-0'
+              }`}>
+              MY CART
+            </h2>
+            {updateQuantityError && (
+              <div className="flex w-full items-center justify-center md:w-1/3">
+                <p className="mx-8 mb-8 text-justify text-xl text-red-600 md:mx-0">
+                  ERROR: {updateQuantityError.message}
+                </p>
+              </div>
+            )}
+            {removeProductError && (
+              <div className="flex w-full items-center justify-center md:w-1/3">
+                <p className="mx-8 mb-8 text-justify text-xl text-red-600 md:mx-0">
+                  ERROR: {updateQuantityError.message}
+                </p>
+              </div>
+            )}
+            {emptyCartError && (
+              <div className="flex w-full items-center justify-center md:w-1/3">
+                <p className="mx-8 text-justify text-xl text-red-600 md:mx-0">
+                  ERROR: {updateQuantityError.message}
+                </p>
+              </div>
+            )}
             {totalCartQuantity(cart) === 0 && (
               <p className="my-8 text-center text-xl">CART IS EMPTY</p>
             )}
