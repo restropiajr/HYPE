@@ -13,6 +13,7 @@ export function Products() {
   useEffect(() => {
     async function loadProducts() {
       try {
+        setIsLoading(true);
         const loadedProducts = await productsFetcher();
         setProducts(loadedProducts);
       } catch (error) {
@@ -21,7 +22,6 @@ export function Products() {
         setIsLoading(false);
       }
     }
-    setIsLoading(true);
     loadProducts();
   }, []);
 

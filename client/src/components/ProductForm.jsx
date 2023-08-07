@@ -2,7 +2,8 @@ import { useContext } from 'react';
 import { ShoppingCartContext } from '../lib';
 
 export function ProductForm({ category, productId }) {
-  const { handleAddToCart } = useContext(ShoppingCartContext);
+  const { handleAddToCart, addToCartError } = useContext(ShoppingCartContext);
+
   return (
     <>
       <div className="col-one flex w-full flex-col items-center justify-center">
@@ -63,10 +64,19 @@ export function ProductForm({ category, productId }) {
           </select>
           <button
             type="submit"
-            className="mb-8 mt-4 block w-3/4 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600">
+            className={` ${
+              addToCartError ? 'mb-0' : 'mb-8'
+            } mt-4 block w-3/4 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600`}>
             ADD TO CART
           </button>
         </form>
+        {addToCartError && (
+          <div className="flex w-full items-center justify-center md:w-1/6">
+            <p className="mx-12 mb-8 mt-2 text-start text-xl text-red-600 md:mx-0">
+              ERROR: {addToCartError.message}
+            </p>
+          </div>
+        )}
       </div>
     </>
   );

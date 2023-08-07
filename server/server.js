@@ -8,6 +8,7 @@ import {
   errorMiddleware,
   authorizationMiddleware,
 } from './lib/index.js';
+import Stripe from 'stripe';
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -16,19 +17,25 @@ const db = new pg.Pool({
   },
 });
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
 const app = express();
 
 // Create paths for static directories
 const reactStaticDir = new URL('../client/build', import.meta.url).pathname;
 
 app.use(express.static(reactStaticDir));
+
 app.use(express.json());
 
 app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
-      throw new ClientError(400, 'Username, Password, and Email not found');
+      throw new ClientError(
+        400,
+        'Username, Password, and Email are required fields'
+      );
     }
     const checkDuplicateSql = `
           select *
@@ -60,6 +67,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     const signUpUserParams = [username, hashedPassword, email];
     const signUpUserResult = await db.query(signUpUserSql, signUpUserParams);
     const [user] = signUpUserResult.rows;
+    if (!user) throw new ClientError(400, 'Cannot sign up user');
     const { userId } = user;
     const createUserCartSql = `
           insert into "carts" ("userId")
@@ -72,8 +80,8 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
       createUserCartParams
     );
     const [cart] = createUserCartResult.rows;
-    if (!user || !cart) throw new ClientError(400, 'Cannot sign up user');
-    res.status(201).json({ user, cart });
+    if (!cart) throw new ClientError(400, 'Cannot sign up user');
+    res.sendStatus(201);
   } catch (error) {
     next(error);
   }
@@ -126,8 +134,9 @@ app.get('/api/products', async (req, res, next) => {
 app.get('/api/product/details/:productId', async (req, res, next) => {
   try {
     const productId = Number(req.params.productId);
-    if (Number(productId) < 0)
-      throw new ClientError(400, 'productId must be a positive integer');
+    if (!productId) throw new ClientError(400, 'ProductId is a required field');
+    if (productId < 0)
+      throw new ClientError(400, 'ProductId must be a positive integer');
     const loadProductSql = `
           select "productId", "name", "category", "price", "description", "imageUrl"
           from "products"
@@ -143,13 +152,51 @@ app.get('/api/product/details/:productId', async (req, res, next) => {
   }
 });
 
+app.get(
+  '/api/mycart/load-cart',
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { userId } = req.user;
+      if (!userId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
+      const loadCartSql = `
+          select "products"."productId", "products"."name","products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity", "cartedItems"."cartedItemId"
+          from "products"
+          join "cartedItems" on "products"."productId" = "cartedItems"."productId"
+          join "carts" on "cartedItems"."cartId" = "carts"."cartId"
+          join "users" on "carts"."userId" = "users"."userId"
+          where "users"."userId" = $1
+          order by "cartedItems"."cartedItemId" desc;
+    `;
+      const loadCartParams = [userId];
+      const loadCartResult = await db.query(loadCartSql, loadCartParams);
+      const cartedItems = loadCartResult.rows;
+      if (!cartedItems) throw new ClientError(404, `Carted products not found`);
+      res.status(200).json(cartedItems);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 app.post(
   '/api/mycart/add-to-cart',
   authorizationMiddleware,
   async (req, res, next) => {
     try {
       const { productId, size, quantity } = req.body;
+      if (!productId || !size || !quantity) {
+        throw new ClientError(
+          400,
+          'ProductId, Size, and Quantity are required fields'
+        );
+      }
       const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
       const checkPrevQuantitySql = `
             select *
             from "cartedItems"
@@ -178,11 +225,11 @@ app.post(
           const [cartedItem] = updateQuantityResults.rows;
           if (!cartedItem)
             throw new ClientError(400, 'Cannot add product to cart');
-          res.status(200).json(cartedItem);
+          res.sendStatus(200);
         } else {
           throw new ClientError(
             400,
-            'The maximum quantity limit of 5 per order has been reached'
+            'The selected quantity for this size has either reached or will reach the maximum limit of 5 items per order'
           );
         }
       } else {
@@ -196,34 +243,8 @@ app.post(
         const [cartedItem] = addToCartResult.rows;
         if (!cartedItem)
           throw new ClientError(400, 'Cannot add product to cart');
-        res.status(201).json(cartedItem);
+        res.sendStatus(201);
       }
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-app.get(
-  '/api/mycart/load-cart',
-  authorizationMiddleware,
-  async (req, res, next) => {
-    try {
-      const { userId } = req.user;
-      const loadCartSql = `
-          select "products"."productId", "products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity"
-          from "products"
-          join "cartedItems" on "products"."productId" = "cartedItems"."productId"
-          join "carts" on "cartedItems"."cartId" = "carts"."cartId"
-          join "users" on "carts"."userId" = "users"."userId"
-          where "users"."userId" = $1
-          order by "cartedItems"."cartedItemId" desc;
-    `;
-      const loadCartParams = [userId];
-      const loadCartResult = await db.query(loadCartSql, loadCartParams);
-      const cartedItems = loadCartResult.rows;
-      if (!cartedItems) throw new ClientError(404, `Carted products not found`);
-      res.status(200).json(cartedItems);
     } catch (error) {
       next(error);
     }
@@ -236,17 +257,23 @@ app.put(
   async (req, res, next) => {
     try {
       const { productId, size, quantity } = req.body;
-      const { cartId } = req.user;
       if (!productId || !size || !quantity) {
-        throw new ClientError(400, 'Product ID, size, and quantity not found');
+        throw new ClientError(
+          400,
+          'Product ID, size, and quantity are required fields'
+        );
+      }
+      const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
       }
       const updateQuantitySql = `
             update "cartedItems"
             set "quantity" = $1
             where "productId" = $2 and "size" = $3 and "cartId" = $4;
       `;
-      const updatedQuantityParams = [quantity, productId, size, cartId];
-      await db.query(updateQuantitySql, updatedQuantityParams);
+      const updateQuantityParams = [quantity, productId, size, cartId];
+      await db.query(updateQuantitySql, updateQuantityParams);
       res.sendStatus(200);
     } catch (error) {
       next(error);
@@ -260,14 +287,20 @@ app.delete(
   async (req, res, next) => {
     try {
       const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
       const { productId, size } = req.body;
-      const emptyCartSql = `
+      if (!productId || !size) {
+        throw new ClientError(400, 'Product ID and size are required fields');
+      }
+      const removeProductSql = `
          delete
          from "cartedItems"
          where "cartId" = $1 and "productId" = $2 and "size" = $3;
     `;
-      const emptyCartParams = [cartId, productId, size];
-      await db.query(emptyCartSql, emptyCartParams);
+      const removeProductParams = [cartId, productId, size];
+      await db.query(removeProductSql, removeProductParams);
       res.sendStatus(204);
     } catch (error) {
       next(error);
@@ -281,6 +314,9 @@ app.delete(
   async (req, res, next) => {
     try {
       const { cartId } = req.user;
+      if (!cartId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
       const emptyCartSql = `
          delete
          from "cartedItems"
@@ -289,6 +325,60 @@ app.delete(
       const emptyCartParams = [cartId];
       await db.query(emptyCartSql, emptyCartParams);
       res.sendStatus(204);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+app.post(
+  `/api/mycart/check-out-cart`,
+  authorizationMiddleware,
+  async (req, res, next) => {
+    try {
+      const { userId } = req.user;
+      if (!userId) {
+        throw new ClientError(401, 'Invalid user information');
+      }
+      const checkOutCartSql = `
+          select "products"."name","products"."price", "products"."imageUrl", "cartedItems"."size", "cartedItems"."quantity"
+          from "products"
+          join "cartedItems" on "products"."productId" = "cartedItems"."productId"
+          join "carts" on "cartedItems"."cartId" = "carts"."cartId"
+          join "users" on "carts"."userId" = "users"."userId"
+          where "users"."userId" = $1
+          order by "cartedItems"."cartedItemId" desc;
+    `;
+      const checkOutCartParams = [userId];
+      const checkOutCartResult = await db.query(
+        checkOutCartSql,
+        checkOutCartParams
+      );
+      const checkOutCart = checkOutCartResult.rows;
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        line_items: checkOutCart.map((item) => {
+          const stripeLineItem = {
+            price_data: {
+              currency: 'usd',
+              unit_amount: Math.round(Number(item.price) * 100),
+              product_data: {
+                name: `${item.name} (Size: ${item.size})`,
+                images: [`${process.env.IMAGE_URL}${item.imageUrl}`],
+              },
+            },
+            quantity: item.quantity,
+          };
+          return stripeLineItem;
+        }),
+        success_url: `${process.env.BASE_URL}/checkout/success`,
+        cancel_url: `${process.env.BASE_URL}/mycart`,
+        shipping_address_collection: {
+          allowed_countries: ['US'],
+        },
+      });
+      res.status(200).json({ url: session.url });
     } catch (error) {
       next(error);
     }

@@ -6,8 +6,9 @@ import { LoadingSpinner } from '../components';
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const [error, setError] = useState();
   const { user, handleLogin } = useContext(AppContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) navigate('/');
@@ -24,7 +25,7 @@ export function Login() {
       const auth = await loginFetcher(event);
       handleLogin(auth);
     } catch (error) {
-      alert(error);
+      setError(error);
     } finally {
       setIsLoading(false);
     }
@@ -38,7 +39,10 @@ export function Login() {
     <>
       <div className="login-container relative w-full">
         <div className="row-one">
-          <div className="col-one mb-8 mt-24 flex w-full flex-col items-center ">
+          <div
+            className={`col-one ${
+              error ? 'mb-0' : 'mb-8'
+            } mt-24 flex w-full flex-col items-center justify-center`}>
             <h2 className="text-3xl">LOG IN</h2>
             <br />
             <form onSubmit={handleSubmit}>
@@ -57,18 +61,24 @@ export function Login() {
                 placeholder="Password"
               />
               <button
-                disabled={isLoading}
                 type="submit"
                 className="m-4 block w-80 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                 LOG IN
               </button>
             </form>
-            <p className="text-xl">
+            <p className="m-4 text-xl">
               Don't have an account?{' '}
               <Link to="/signup" className="underline">
                 Sign up
               </Link>
             </p>
+            {error && (
+              <div className="flex w-full items-center justify-center md:w-1/5">
+                <p className="m-4 text-justify text-xl text-red-600">
+                  ERROR: {error.message}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
