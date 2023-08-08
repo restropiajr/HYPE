@@ -36,10 +36,10 @@ export function CheckoutSuccess() {
         storehype@gmail.com
       </a>
       <Link
-        to="/"
+        to="/products"
         className="flex cursor-pointer items-center justify-center rounded p-2 transition duration-200 ease-in-out md:hover:bg-red-600">
         <FaArrowLeftLong size={30} color={'black'} />
-        <p className="p-2 text-center text-xl font-bold">BACK TO HOME</p>
+        <p className="p-2 text-center text-xl font-bold">CONTINUE SHOPPING</p>
       </Link>
     </div>
   );
