@@ -54,7 +54,6 @@ export default function App() {
     localStorage.removeItem(tokenKey);
     setUser(undefined);
     setToken(undefined);
-    navigate('/');
   }
 
   const contextValue = { user, token, handleLogin, handleSignOut };

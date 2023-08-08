@@ -6,7 +6,7 @@ import { LoadingSpinner, ErrorMessage } from '../components';
 import { useNavigate } from 'react-router-dom';
 
 export function CheckoutSuccess() {
-  const { handleEmptyCart, emptyCartError, setEmptyCartError, isCartLoading } =
+  const { handleEmptyCart, emptyCartError, isCartLoading } =
     useContext(ShoppingCartContext);
   const { user } = useContext(AppContext);
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export function CheckoutSuccess() {
   useEffect(() => {
     if (!user) navigate('/login');
     handleEmptyCart();
-  }, [user, navigate, handleEmptyCart, setEmptyCartError]);
+  }, [user, navigate, handleEmptyCart]);
 
   if (isCartLoading) {
     return <LoadingSpinner />;
