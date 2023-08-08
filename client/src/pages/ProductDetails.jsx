@@ -76,7 +76,7 @@ export function ProductDetails() {
               </p>
             </Link>
             <div className="card-wrapper mx-8 md:flex md:flex-col md:items-center">
-              <div className="img-wrapper w-full md:w-3/4">
+              <div className="img-wrapper w-full md:w-1/2">
                 <img className="w-full" src={imageUrl} alt="name" />
               </div>
               <div className="card-body flex flex-col items-center justify-center">
