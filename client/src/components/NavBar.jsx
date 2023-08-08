@@ -114,7 +114,7 @@ export function NavBar() {
                         </li>
                       </Link>
                     ) : (
-                      <Link to="/">
+                      <Link to="/login">
                         <li
                           onClick={() => handleLogout()}
                           className="m-4 cursor-pointer rounded p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
