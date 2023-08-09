@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { LoadingSpinner } from '../components';
 
 export function ProductList({
   products,
@@ -13,14 +14,20 @@ export function ProductList({
     useState(searchByInput);
   const [debouncedfilterInput, setDebouncedFilterInput] =
     useState(filterByInput);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
+    setIsLoading(true);
+    const timeoutId = setTimeout(() => {
       setDebouncedSortInput(sortByInput);
       setDebouncedFilterInput(filterByInput);
       setDebouncedSearchInput(searchByInput);
+      setIsLoading(false);
     }, 500);
-    return () => clearTimeout(timerId);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [sortByInput, filterByInput, searchByInput]);
 
   if (debouncedSortInput === 'alpha-order') {
@@ -60,6 +67,10 @@ export function ProductList({
   }
 
   const productsFound = copyProducts.length > 0;
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>

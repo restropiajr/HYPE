@@ -14,7 +14,8 @@ export function ProductDetails() {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const { setAddToCartError, isCartLoading } = useContext(ShoppingCartContext);
+  const { setAddToCartError, isCartLoading, setIsCartLoading } =
+    useContext(ShoppingCartContext);
 
   useEffect(() => {
     async function loadProduct() {
@@ -28,9 +29,10 @@ export function ProductDetails() {
         setIsLoading(false);
       }
     }
+    setIsCartLoading(false);
     setAddToCartError(null);
     loadProduct();
-  }, [productId, setAddToCartError]);
+  }, [productId, setAddToCartError, setIsCartLoading]);
 
   if (isLoading || isCartLoading) {
     return <LoadingSpinner />;

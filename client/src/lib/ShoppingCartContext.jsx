@@ -127,6 +127,7 @@ export function ShoppingCartProvider({ children }) {
   const contextValue = {
     cart,
     isCartLoading,
+    setIsCartLoading,
     cartError,
     handleAddToCart,
     addToCartError,
