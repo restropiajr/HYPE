@@ -3,7 +3,7 @@ export function DisclaimerModal({ onClick }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-90">
       <div className="flex w-full flex-col items-center justify-center rounded bg-white p-8 shadow-md md:w-1/2">
         <h2 className="m-4 rounded text-center text-3xl">DISCLAIMER</h2>
-        <p className="m-4 text-justify text-lg md:text-xl">
+        <p className="text-md m-4 text-justify md:text-xl">
           This website is for educational purposes only, not for real
           transactions or sensitive information. Brands, logos, and trademarks
           are owned by their respective owners and used for educational
@@ -12,7 +12,7 @@ export function DisclaimerModal({ onClick }) {
           is for learning and practice only. Visitors should not consider
           elements as real business operations.
         </p>
-        <p className="m-4 text-justify text-lg md:text-xl">
+        <p className="text-md m-4 text-justify md:text-xl">
           By clicking the "ACCEPT" button below, you acknowledge that no actual
           purchases will occur, and no payment processing will take place on
           this platform. It's important to refrain from using genuine personal
