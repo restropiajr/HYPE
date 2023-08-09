@@ -43,12 +43,13 @@ function CartedProduct({ product }) {
         <p className="card-price pb-2 text-lg font-bold">{`SIZE: ${size}`}</p>
         <p className="card-price pb-2 text-lg font-bold">{`QUANTITY: ${quantity}`}</p>
         <form
+          className="flex w-full flex-col items-center justify-center"
           onSubmit={(event) => handleUpdateQuantity(event, productId, size)}>
           <select
             required
             onChange={(event) => setShowUpdateButton(event.target.value !== '')}
             name="quantity"
-            className="w-full cursor-pointer rounded border-2 border-black text-center text-xs font-bold transition duration-200 ease-in-out md:hover:bg-red-600">
+            className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:hover:bg-red-600">
             <option value="">--UPDATE QUANTITY--</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -59,7 +60,7 @@ function CartedProduct({ product }) {
           {showUpdateButton && (
             <button
               type="submit"
-              className="mt-4 block w-full rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
+              className="mt-4 block w-1/2 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
               UPDATE
             </button>
           )}
@@ -69,7 +70,7 @@ function CartedProduct({ product }) {
         onClick={() => handleRemoveProduct(productId, size)}
         type="button"
         className="absolute right-0 top-0 flex cursor-pointer items-center justify-center rounded border-black p-2 transition duration-200 ease-in-out md:hover:bg-red-600">
-        <FaXmark size={30} />
+        <FaXmark size={25} />
       </button>
     </div>
   );
