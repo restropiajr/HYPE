@@ -17,10 +17,10 @@ export function Home() {
       src: '/images/nike-carousel.png',
     },
     {
-      src: '/images/mj-carousel.jpg',
+      src: '/images/bape-carousel.png',
     },
     {
-      src: '/images/bape-carousel.png',
+      src: '/images/mj-carousel.jpg',
     },
   ];
 
