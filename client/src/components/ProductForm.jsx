@@ -47,7 +47,7 @@ export function ProductForm({ category, productId }) {
               name="size"
               className="w-3/4 cursor-pointer rounded border-2 border-black text-center text-xs font-bold transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600">
               <option value="">--CHOOSE A SIZE--</option>
-              <option value="ONE">ONE SIZE</option>
+              <option value="ONE">ONE</option>
             </select>
           ) : null}
           <h4 className="card-name m-2 text-xl">QUANTITY</h4>

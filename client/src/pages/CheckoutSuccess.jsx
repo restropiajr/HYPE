@@ -26,7 +26,7 @@ export function CheckoutSuccess() {
 
   return (
     <div className="mt-24 flex flex-col items-center justify-center">
-      <p className="mb-8 text-center text-xl font-bold">THANK YOU FOR ORDER!</p>
+      <h2 className="mb-8 text-center text-3xl">THANK YOU FOR YOUR ORDER</h2>
       <p className="mb-8 text-center text-xl font-bold">
         IF YOU HAVE ANY QUESTIONS, PLEASE EMAIL:
       </p>

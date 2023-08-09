@@ -6,9 +6,9 @@ export function Products() {
   const [products, setProducts] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const [sortByInput, setSortByInput] = useState();
-  const [filterByInput, setFilterByInput] = useState();
-  const [searchByInput, setSearchByInput] = useState();
+  const [sortByInput, setSortByInput] = useState('');
+  const [filterByInput, setFilterByInput] = useState('');
+  const [searchByInput, setSearchByInput] = useState('');
 
   useEffect(() => {
     async function loadProducts() {
@@ -42,9 +42,8 @@ export function Products() {
             <br />
             <p className="px-4 text-justify text-xl">
               Discover the hottest streetwear, exclusive sneakers, and
-              trendsetting clothing that define the urban culture. Elevate your
-              style and make a statement with our curated collection of iconic
-              pieces.
+              trendsetting clothing that define the urban culture. Make a
+              statement with our curated collection of iconic pieces.
             </p>
           </div>
         </div>

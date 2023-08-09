@@ -48,34 +48,7 @@ CREATE TABLE "public"."cartedItems" (
   OIDS=FALSE
 );
 
-CREATE TABLE "public"."orders" (
-	"orderId" serial NOT NULL,
-	"userId" integer NOT NULL,
-	"createdAt" TIMESTAMP NOT NULL,
-	CONSTRAINT "orders_pk" PRIMARY KEY ("orderId")
-) WITH (
-  OIDS=FALSE
-);
-
-CREATE TABLE "public"."orderedItems" (
-	"orderedItemId" serial NOT NULL,
-	"orderId" integer NOT NULL,
-	"quantity" integer NOT NULL,
-	"name" TEXT NOT NULL,
-	"category" TEXT NOT NULL,
-	"price" DECIMAL NOT NULL,
-	"description" TEXT NOT NULL,
-	"imageUrl" TEXT NOT NULL,
-	CONSTRAINT "orderedItems_pk" PRIMARY KEY ("orderedItemId")
-) WITH (
-  OIDS=FALSE
-);
-
 ALTER TABLE "carts" ADD CONSTRAINT "carts_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
 ALTER TABLE "cartedItems" ADD CONSTRAINT "cartedItems_fk0" FOREIGN KEY ("cartId") REFERENCES "carts"("cartId");
 ALTER TABLE "cartedItems" ADD CONSTRAINT "cartedItems_fk1" FOREIGN KEY ("productId") REFERENCES "products"("productId");
-
-ALTER TABLE "orders" ADD CONSTRAINT "orders_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-
-ALTER TABLE "orderedItems" ADD CONSTRAINT "orderedItems_fk0" FOREIGN KEY ("orderId") REFERENCES "orders"("orderId");

@@ -8,3 +8,4 @@ export * from './LoadingSpinner';
 export * from './ErrorMessage';
 export * from './ProductForm';
 export * from './MyCartList';
+export * from './DisclaimerModal';

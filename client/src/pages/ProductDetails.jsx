@@ -14,7 +14,8 @@ export function ProductDetails() {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const { setAddToCartError } = useContext(ShoppingCartContext);
+  const { setAddToCartError, isCartLoading, setIsCartLoading } =
+    useContext(ShoppingCartContext);
 
   useEffect(() => {
     async function loadProduct() {
@@ -28,11 +29,12 @@ export function ProductDetails() {
         setIsLoading(false);
       }
     }
+    setIsCartLoading(false);
     setAddToCartError(null);
     loadProduct();
-  }, [productId, setAddToCartError]);
+  }, [productId, setAddToCartError, setIsCartLoading]);
 
-  if (isLoading) {
+  if (isLoading || isCartLoading) {
     return <LoadingSpinner />;
   }
 
@@ -76,7 +78,7 @@ export function ProductDetails() {
               </p>
             </Link>
             <div className="card-wrapper mx-8 md:flex md:flex-col md:items-center">
-              <div className="img-wrapper w-full md:w-3/4">
+              <div className="img-wrapper w-full md:w-1/2">
                 <img className="w-full" src={imageUrl} alt="name" />
               </div>
               <div className="card-body flex flex-col items-center justify-center">

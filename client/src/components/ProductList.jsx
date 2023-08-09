@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { LoadingSpinner } from '../components';
 
 export function ProductList({
   products,
@@ -7,30 +9,52 @@ export function ProductList({
   searchByInput,
 }) {
   let copyProducts = [...products];
+  const [debouncedSortInput, setDebouncedSortInput] = useState(sortByInput);
+  const [debouncedSearchInput, setDebouncedSearchInput] =
+    useState(searchByInput);
+  const [debouncedfilterInput, setDebouncedFilterInput] =
+    useState(filterByInput);
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (sortByInput === 'alpha-order') {
+  useEffect(() => {
+    setIsLoading(true);
+    const timeoutId = setTimeout(() => {
+      setDebouncedSortInput(sortByInput);
+      setDebouncedFilterInput(filterByInput);
+      setDebouncedSearchInput(searchByInput);
+      setIsLoading(false);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [sortByInput, filterByInput, searchByInput]);
+
+  if (debouncedSortInput === 'alpha-order') {
     copyProducts.sort();
-  } else if (sortByInput === 'reverse-alpha-order') {
+  } else if (debouncedSortInput === 'reverse-alpha-order') {
     copyProducts.reverse();
-  } else if (sortByInput === 'asc') {
+  } else if (debouncedSortInput === 'asc') {
     copyProducts.sort((a, b) => Number(a.price) - Number(b.price));
-  } else if (sortByInput === 'desc') {
+  } else if (debouncedSortInput === 'desc') {
     copyProducts.sort((a, b) => Number(b.price) - Number(a.price));
   }
 
   function filterByComparison() {
-    return copyProducts.filter((product) => product.category === filterByInput);
+    return copyProducts.filter(
+      (product) => product.category === debouncedfilterInput
+    );
   }
 
   function searchByComparison() {
     return copyProducts.filter((product) =>
-      product.name.toLowerCase().includes(searchByInput.toLowerCase())
+      product.name.toLowerCase().includes(debouncedSearchInput.toLowerCase())
     );
   }
 
   function filterBySearchByComparison() {
     return filterByComparison().filter((product) =>
-      product.name.toLowerCase().includes(searchByInput.toLowerCase())
+      product.name.toLowerCase().includes(debouncedSearchInput.toLowerCase())
     );
   }
 
@@ -43,6 +67,10 @@ export function ProductList({
   }
 
   const productsFound = copyProducts.length > 0;
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
