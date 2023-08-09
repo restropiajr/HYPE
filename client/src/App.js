@@ -1,5 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import { NavBar, Footer, ScrollUpButton, LoadingSpinner } from './components';
+import {
+  NavBar,
+  Footer,
+  ScrollUpButton,
+  LoadingSpinner,
+  DisclaimerModal,
+} from './components';
 import {
   Home,
   Contact,
@@ -20,6 +26,7 @@ const tokenKey = 'react-context-jwt';
 export default function App() {
   const [user, setUser] = useState(undefined);
   const [token, setToken] = useState(undefined);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [isAuthorizing, setIsAuthorizing] = useState(true);
   const navigate = useNavigate();
 
@@ -34,6 +41,7 @@ export default function App() {
       }
       setIsAuthorizing(false);
     }
+    document.documentElement.classList.add('overflow-hidden');
     setIsAuthorizing(true);
     loadUser();
   }, []);
@@ -56,12 +64,18 @@ export default function App() {
     setToken(undefined);
   }
 
+  function hideModal() {
+    setIsModalOpen(false);
+    document.documentElement.classList.remove('overflow-hidden');
+  }
+
   const contextValue = { user, token, handleLogin, handleSignOut };
 
   return (
     <AppContext.Provider value={contextValue}>
       <ShoppingCartProvider>
         <div className="app-container relative flex min-h-screen flex-col">
+          {isModalOpen && <DisclaimerModal onClick={hideModal} />}
           <NavBar />
           <div className="flex-grow">
             <Routes>
