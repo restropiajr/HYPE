@@ -91,7 +91,7 @@ export function ProductDetails() {
           </div>
         </div>
         <div className="row-two">
-          <h4 className="m-2 text-center text-xl text-red-600">
+          <h4 className="text-md m-2 text-center text-red-600">
             MAXIMUM LIMIT OF 5 ITEMS PER ORDER
           </h4>
           <Accordion accordionTopics={accordionTopics} />

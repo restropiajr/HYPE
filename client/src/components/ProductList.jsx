@@ -31,9 +31,21 @@ export function ProductList({
   }, [sortByInput, filterByInput, searchByInput]);
 
   if (debouncedSortInput === 'alpha-order') {
-    copyProducts.sort();
+    copyProducts.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
   } else if (debouncedSortInput === 'reverse-alpha-order') {
-    copyProducts.reverse();
+    copyProducts.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) return 1;
+      if (nameA > nameB) return -1;
+      return 0;
+    });
   } else if (debouncedSortInput === 'asc') {
     copyProducts.sort((a, b) => Number(a.price) - Number(b.price));
   } else if (debouncedSortInput === 'desc') {
