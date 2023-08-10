@@ -1,6 +1,14 @@
 ## HYPE
 
+<p align="center">
+  <img src="https://github.com/restropiajr/HYPE/assets/66459527/722918e3-87b6-4876-99b1-54298a158967" width=15% height=15%>
+</p>
+
+<div align="center">
+  
 **An interactive website that allows users to explore, purchase, and checkout a curated collection of streetwear products.**
+ 
+</div>
 
 ## Why I Built This
 
