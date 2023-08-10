@@ -17,6 +17,9 @@ As someone who's into streetwear collecting, I decided to channel that passion i
 - Dokku
 - Figma
 - DBDesigner
+- Argon2
+- JSON Web Token
+- Dotenv
   
 ## Features
 
