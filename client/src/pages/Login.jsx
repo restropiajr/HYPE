@@ -7,6 +7,8 @@ import { LoadingSpinner } from '../components';
 export function Login() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const { user, handleLogin } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -31,6 +33,12 @@ export function Login() {
     }
   }
 
+  function handleDemoClick() {
+    const demoInput = 'demo';
+    setUsername(demoInput);
+    setPassword(demoInput);
+  }
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -48,6 +56,8 @@ export function Login() {
             <form onSubmit={handleSubmit}>
               <input
                 required
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
                 className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
                 type="text"
                 name="username"
@@ -55,6 +65,8 @@ export function Login() {
               />
               <input
                 required
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
                 className="m-4 block w-80 rounded border-2 border-black p-2 text-lg"
                 type="password"
                 name="password"
@@ -64,6 +76,12 @@ export function Login() {
                 type="submit"
                 className="m-4 block w-80 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
                 LOG IN
+              </button>
+              <button
+                onClick={handleDemoClick}
+                type="button"
+                className="m-4 block w-80 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:hover:bg-red-600">
+                USE DEMO ACCOUNT
               </button>
             </form>
             <p className="m-4 text-xl">
