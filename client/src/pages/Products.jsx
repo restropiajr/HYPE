@@ -43,7 +43,7 @@ export function Products() {
             <p className="px-4 text-justify text-xl">
               Discover the hottest streetwear, exclusive sneakers, and
               trendsetting clothing that define the urban culture. Make a
-              statement with our curated collection of iconic pieces.
+              statement with our curated collection of iconic pieces!
             </p>
           </div>
         </div>
@@ -75,7 +75,7 @@ export function Products() {
             <input
               type="search"
               onChange={(event) => setSearchByInput(event.target.value)}
-              placeholder="SEARCH"
+              placeholder="SEARCH NAME"
               className="m-2 w-40 rounded border-2 border-black p-2 text-center text-xs transition duration-200 ease-in-out focus:bg-red-600 md:hover:bg-red-600"
             />
           </div>
