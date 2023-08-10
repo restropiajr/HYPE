@@ -47,9 +47,21 @@ export function ProductList({
       return 0;
     });
   } else if (debouncedSortInput === 'asc') {
-    copyProducts.sort((a, b) => Number(a.price) - Number(b.price));
+    copyProducts.sort((a, b) => {
+      const priceA = Number(a.price);
+      const priceB = Number(b.price);
+      if (priceA < priceB) return -1;
+      if (priceA > priceB) return 1;
+      return 0;
+    });
   } else if (debouncedSortInput === 'desc') {
-    copyProducts.sort((a, b) => Number(b.price) - Number(a.price));
+    copyProducts.sort((a, b) => {
+      const priceA = Number(a.price);
+      const priceB = Number(b.price);
+      if (priceA < priceB) return 1;
+      if (priceA > priceB) return -1;
+      return 0;
+    });
   }
 
   function filterByComparison() {
@@ -117,9 +129,7 @@ function Product({ product }) {
           <h4 className="card-name rounded p-2 text-xl transition duration-200 ease-in-out md:group-hover:bg-red-600">
             {name}
           </h4>
-          <p className="card-price text-lg font-bold">{`$${Number(
-            price
-          ).toFixed(2)}`}</p>
+          <p className="card-price text-lg font-bold">{`$${price}`}</p>
         </div>
       </Link>
     </div>

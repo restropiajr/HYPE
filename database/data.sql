@@ -16,7 +16,7 @@ values
   (2, 'Air Jordan Black/Red 1', 'shoe', 500.00, 'Elevate your sneaker collection with the Air Jordan 1 High Bred Patent, showcasing a striking black and red patent leather upper.', '/products/jordan-bred-1.jpg'),
   (3, 'Air Jordan Black/Red 11', 'shoe', 350.00, 'Make a bold statement with the Air Jordan 11 in Black/Red, featuring shiny patent leather overlays and iconic red detailing.', '/products/jordan-bred-11.jpg'),
   (4, 'Air Jordan Mocha 1', 'shoe', 750.00, 'Pay homage to the past with the Air Jordan 1 High Dark Mocha, combining Sail leather, black leather, and Mocha suede for a unique look.', '/products/jordan-mocha-1.jpg'),
-  (5, 'Air Jordan OFF WHITE x UNC 1', 'shoe', 1500.00, 'Experience the collaboration between Off-White and Air Jordan with the Off-White x UNC 1, featuring deconstructed leather and iconic detailing.', '/products/jordan-offwhite-1.jpg'),
+  (5, 'Air Jordan x OFF WHITE UNC 1', 'shoe', 1500.00, 'Experience the collaboration between Off-White and Air Jordan with the Off-White x UNC 1, featuring deconstructed leather and iconic detailing.', '/products/jordan-offwhite-1.jpg'),
   (6, 'Balenciaga Track', 'shoe', 1200.00, 'Elevate your sneaker game with the Balenciaga Track trainer featuring a unique caged upper design.', '/products/balenciaga-track.jpg'),
   (7, 'Balenciaga TripleS', 'shoe', 1200.00, 'Experience unparalleled comfort and style with the Balenciaga TripleS sneaker, boasting a distinctive double foam and mesh construction.', '/products/balenciaga-triples.jpg'),
   (8, 'BAPE Bearbrick', 'accessory', 1000.00, 'Celebrate the Japanese New Year with the limited edition BAPE Bearbrick by Medicom Toy, featuring iconic BAPE design elements.', '/products/bape-bearbrick.jpg'),

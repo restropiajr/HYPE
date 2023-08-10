@@ -83,9 +83,7 @@ export function ProductDetails() {
               </div>
               <div className="card-body flex flex-col items-center justify-center">
                 <h4 className="card-name m-2 text-xl">{name}</h4>
-                <p className="card-price mb-2 text-lg font-bold">{`$${Number(
-                  price
-                ).toFixed(2)}`}</p>
+                <p className="card-price mb-2 text-lg font-bold">{`$${price}`}</p>
               </div>
             </div>
           </div>
