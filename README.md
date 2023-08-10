@@ -24,7 +24,24 @@ TBD
   
 ## Features
 
-- TBD
+1. User can view the disclaimer modal.
+2. User can view the home page.
+3. User can create an account.
+4. User can log in to their account.
+5. User can log out of their account.
+6. User can view the list of products.
+7. User can sort the list of products.
+8. User can search through the list of products.
+9. User can filter through the list of products.
+10. User can view the product details.
+11. User can add products to their shopping cart.
+12. User can view their shopping cart.
+13. User can update the quantity of products in the shopping cart.
+14. User can delete products from the shopping cart.
+15. User can checkout products with a form from the shopping cart.
+16. User can view a checkout success page.
+17. User can view contact information.
+18. User can view a not found page.
   
 ## Link Demo
 
