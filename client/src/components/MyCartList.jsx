@@ -37,9 +37,7 @@ function CartedProduct({ product }) {
         <h4 className="card-name rounded p-2 text-xl transition duration-200 ease-in-out md:group-hover:bg-red-600">
           {name}
         </h4>
-        <p className="card-price pb-2 text-lg font-bold">{`$${Number(
-          price
-        ).toFixed(2)}`}</p>
+        <p className="card-price pb-2 text-lg font-bold">{`$${price}`}</p>
         <p className="card-price pb-2 text-lg font-bold">{`SIZE: ${size}`}</p>
         <p className="card-price pb-2 text-lg font-bold">{`QUANTITY: ${quantity}`}</p>
         <form

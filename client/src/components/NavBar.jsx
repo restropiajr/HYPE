@@ -41,7 +41,7 @@ export function NavBar() {
                 <FaCartShopping size={30} color="black" />
                 {user && totalCartQuantity(cart) > 0 && (
                   <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-black bg-red-600 p-1 text-xs text-white">
-                    <p>{totalCartQuantity(cart)}</p>
+                    <p>{String(totalCartQuantity(cart))}</p>
                   </div>
                 )}
               </div>

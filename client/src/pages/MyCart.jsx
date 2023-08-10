@@ -117,7 +117,7 @@ export function MyCart() {
                     TOTAL NUMBER OF ITEMS
                   </p>
                   <p className="p-4 text-start text-xl font-bold text-red-600">
-                    {`${totalCartQuantity(cart)}`}
+                    {String(totalCartQuantity(cart))}
                   </p>
                 </div>
                 <div className="flex justify-between">
@@ -125,7 +125,7 @@ export function MyCart() {
                     TOTAL COST (USD)
                   </p>
                   <p className="p-4 text-start text-xl font-bold text-red-600">
-                    {`$${totalCartCost(cart)}`}
+                    {`$${totalCartCost(cart).toFixed(2)}`}
                   </p>
                 </div>
                 <div className="flex items-center justify-center">

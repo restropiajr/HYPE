@@ -8,7 +8,6 @@ export async function checkOutFetcher(token) {
   };
   const res = await fetch(`/api/mycart/check-out-cart`, req);
   const result = await res.json();
-  console.log(result);
   if (!res.ok) {
     throw new Error(result.error);
   }
