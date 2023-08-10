@@ -1,14 +1,10 @@
 ## HYPE
 
-TBD
-  
- **A dynamic website that allows users to purchase view and checkout streetwear product.**
- 
-</div>
+**An interactive website that allows users to explore, purchase, and checkout a curated collection of streetwear products.**
 
 ## Why I Built This
 
-TBD
+As someone who's into streetwear collecting, I decided to channel that passion into a project. This venture has given me a chance to showcase the skills I've picked up in the PERN stack, turning them into a interactive e-commerce website.
 
 ## Technologies Used
 
@@ -24,28 +20,28 @@ TBD
   
 ## Features
 
-1. User can view the disclaimer modal.
-2. User can view the home page.
-3. User can create an account.
-4. User can log in to their account.
-5. User can log out of their account.
-6. User can view the list of products.
-7. User can sort the list of products.
-8. User can search through the list of products.
-9. User can filter through the list of products.
-10. User can view the product details.
-11. User can add products to their shopping cart.
-12. User can view their shopping cart.
-13. User can update the quantity of products in the shopping cart.
-14. User can delete products from the shopping cart.
-15. User can checkout products with a form from the shopping cart.
-16. User can view a checkout success page.
-17. User can view contact information.
-18. User can view a not found page.
+- User can view the disclaimer modal.
+- User can view the home page.
+- User can create an account.
+- User can log in to their account.
+- User can log out of their account.
+- User can view the list of products.
+- User can sort the list of products.
+- User can search through the list of products.
+- User can filter through the list of products.
+- User can view the product details.
+- User can add products to their shopping cart.
+- User can view their shopping cart.
+- User can update the quantity of products in the shopping cart.
+- User can delete products from the shopping cart.
+- User can checkout products with a form from the shopping cart.
+- User can view a checkout success page.
+- User can view contact information.
+- User can view a not found page.
   
 ## Link Demo
 
-TBD
+Try the website at https://hype.restropiajr.com/
 
 ## Preview
 
@@ -58,7 +54,7 @@ TBD
 - Express
 - React
 - Node.js
-- NPM 6 or higher
+- NPM
 
 ### Getting Started
 1. Clone the repository.
@@ -73,5 +69,5 @@ TBD
 10. Run the Application: **npm run dev**
 8. Open your web browser and navigate to **http://localhost:3000** to view the running application.
 
-Notes
+#### Notes
 - Ensure you've created a Stripe account and have a valid Secret Key for the STRIPE_SECRET_KEY environment variable.
