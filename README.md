@@ -12,7 +12,7 @@
 
 ## Why I Built This
 
-As someone who's into streetwear collecting, I decided to channel that passion into a project. This venture has given me a chance to showcase the skills I've picked up in the PERN stack, turning them into a interactive e-commerce website.
+As someone who's into streetwear collecting, I decided to channel that passion into a project. This venture has given me a chance to showcase the skills I've picked up learning about the PERN stack, turning them into an interactive Ecommerce website.
 
 ## Technologies Used
 
