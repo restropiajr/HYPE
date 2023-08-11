@@ -72,9 +72,9 @@ TBD
 2. Install Dependencies: **npm install**
 3. Make a copy of the .env file.
 4. Create a database: **createdb name**
-5. Update the "changeMe" part of the DATABASE_URL env variable to your database name.
-6. Update the "changeMe" part of the TOKEN_SECRET env variable with a secret key for token generation.
-7. Update the "changeMe" part of the STRIPE_SECRET_KEY env variable with your Stripe account's Secret Key.
+5. Update the "changeMe" part of the DATABASE_URL environment variable to your database name.
+6. Update the "changeMe" part of the TOKEN_SECRET environment variable with a secret key for token generation.
+7. Update the "changeMe" part of the STRIPE_SECRET_KEY environment variable with your Stripe account's Secret Key.
 8. Start PostgreSQL: **sudo service postgresql start**
 9. Import Database: **npm run db:import**
 10. Run the Application: **npm run dev**
