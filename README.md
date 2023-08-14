@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/restropiajr/HYPE/assets/66459527/97ed6042-7e1e-4ed4-82ed-9b472d664021" width=25% height=25%>
+  <img src="https://github.com/restropiajr/HYPE/assets/66459527/97ed6042-7e1e-4ed4-82ed-9b472d664021" width=30% height=30%>
 </p>
 
 <div align="center">
