@@ -60,7 +60,9 @@ Try the website at https://hype.restropiajr.com/
 
 ## Preview
 
-TBD
+<p align="center">
+  <img src="https://github.com/restropiajr/HYPE/assets/66459527/9e4c43f5-e786-4653-8fe7-213c10866e4e">
+</p>
 
 ## Development
 
