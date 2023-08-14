@@ -20,10 +20,10 @@ As someone who's into streetwear collecting, I decided to channel that passion i
 
 ## Technologies Used
 
-- PostgreSQL
-- Express
 - React.js
 - Node.js
+- Express.js
+- PostgreSQL
 - Tailwind CSS
 - AWS EC2
 - Dokku
@@ -72,11 +72,11 @@ Try the website at https://hype.restropiajr.com/
 ## Development
 
 ### System Requirements
-- PostgreSQL
-- Express
-- React
+- React.js
 - Node.js
-- NPM
+- Express.js
+- PostgreSQL
+- npm
 
 ### Getting Started
 1. Clone the repository.
