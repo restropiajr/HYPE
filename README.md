@@ -4,6 +4,10 @@
   <img src="https://github.com/restropiajr/HYPE/assets/66459527/722918e3-87b6-4876-99b1-54298a158967" width=15% height=15%>
 </p>
 
+<p align="center">
+  <img src="https://github.com/restropiajr/HYPE/assets/66459527/97ed6042-7e1e-4ed4-82ed-9b472d664021" width=25% height=25%>
+</p>
+
 <div align="center">
   
 **An interactive website that allows users to explore, purchase, and checkout a curated collection of streetwear products.**
