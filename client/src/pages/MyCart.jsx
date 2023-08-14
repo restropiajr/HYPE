@@ -76,28 +76,28 @@ export function MyCart() {
               MY CART
             </h2>
             {updateQuantityError && (
-              <div className="flex w-full items-center justify-center md:w-1/3">
+              <div className="flex w-full items-center justify-center md:w-1/2">
                 <p className="mx-8 mb-8 text-justify text-xl text-red-600 md:mx-0">
                   ERROR: {updateQuantityError.message}
                 </p>
               </div>
             )}
             {removeProductError && (
-              <div className="flex w-full items-center justify-center md:w-1/3">
+              <div className="flex w-full items-center justify-center md:w-1/2">
                 <p className="mx-8 mb-8 text-justify text-xl text-red-600 md:mx-0">
                   ERROR: {removeProductError.message}
                 </p>
               </div>
             )}
             {emptyCartError && (
-              <div className="flex w-full items-center justify-center md:w-1/3">
+              <div className="flex w-full items-center justify-center md:w-1/2">
                 <p className="mx-8 text-justify text-xl text-red-600 md:mx-0">
                   ERROR: {emptyCartError.message}
                 </p>
               </div>
             )}
             {checkOutError && (
-              <div className="flex w-full items-center justify-center md:w-1/3">
+              <div className="flex w-full items-center justify-center md:w-1/2">
                 <p className="mx-8 text-justify text-xl text-red-600 md:mx-0">
                   ERROR: {checkOutError.message}
                 </p>
@@ -111,7 +111,7 @@ export function MyCart() {
         {totalCartQuantity(cart) > 0 && (
           <div className="row-two">
             <div className="col-one mb-8 flex w-full justify-center">
-              <div className="flex w-5/6 flex-col rounded border-2 border-black md:w-2/6">
+              <div className="flex w-5/6 flex-col rounded border-2 border-black lg:w-2/6">
                 <div className="flex justify-between">
                   <p className="p-4 text-start text-xl font-bold">
                     TOTAL NUMBER OF ITEMS

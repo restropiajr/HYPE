@@ -1,7 +1,7 @@
 export function DisclaimerModal({ onClick }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-90">
-      <div className="flex w-full flex-col items-center justify-center rounded bg-white p-8 shadow-md md:w-1/2">
+      <div className="flex w-full flex-col items-center justify-center rounded bg-white p-8 shadow-md lg:w-1/2">
         <h2 className="m-2 rounded text-center text-2xl md:text-3xl">
           DISCLAIMER
         </h2>
