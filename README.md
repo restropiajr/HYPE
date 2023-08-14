@@ -64,6 +64,10 @@ Try the website at https://hype.restropiajr.com/
   <img src="https://github.com/restropiajr/HYPE/assets/66459527/9e4c43f5-e786-4653-8fe7-213c10866e4e">
 </p>
 
+<p align="center">
+  <img src="https://github.com/restropiajr/HYPE/assets/66459527/ae4ff6c7-79c9-4d16-8ab9-f6dd78a0f243">
+</p>
+
 ## Development
 
 ### System Requirements
