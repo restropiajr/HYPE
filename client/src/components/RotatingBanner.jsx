@@ -35,7 +35,7 @@ function Banner({ image }) {
   return (
     <div
       style={{ backgroundImage: `url(${image.src})` }}
-      className="relative z-0 h-[300px] w-full bg-cover bg-center duration-500 md:h-[750px]"></div>
+      className="relative z-0 h-[300px] w-full bg-cover bg-center duration-500 md:h-[500px] lg:h-[700px]"></div>
   );
 }
 

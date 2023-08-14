@@ -102,7 +102,9 @@ export function ProductList({
         <div className="row-three flex flex-wrap">
           {copyProducts.map((product) => {
             return (
-              <div key={product.productId} className="col flex w-full md:w-1/4">
+              <div
+                key={product.productId}
+                className="col flex w-full md:w-1/2 lg:w-1/4">
                 <Product product={product} />
               </div>
             );

@@ -51,7 +51,7 @@ export function Home() {
         </div>
         <div className="row-two">
           <div className="col-one mb-8 flex w-full items-center justify-center md:mb-16">
-            <div className="img-wrapper relative w-full md:w-2/3">
+            <div className="img-wrapper relative w-full lg:w-2/3">
               <img
                 className="w-full"
                 src="/images/turtledoves.jpg"
@@ -66,16 +66,16 @@ export function Home() {
           </div>
         </div>
         <div className="row-three">
-          <div className="col-one mb-8 flex w-full flex-col justify-center md:mb-16 md:flex-row">
-            <div className="img-wrapper w-full md:w-[37.5%]">
+          <div className="col-one mb-8 flex w-full flex-col justify-center md:mb-16 lg:flex-row">
+            <div className="img-wrapper w-full lg:w-[37.5%]">
               <img
                 className="w-full"
                 src="/images/insidestore.jpg"
                 alt="insidestore"
               />
             </div>
-            <div className="flex w-full flex-col items-center md:w-[37.5%]">
-              <h2 className="mt-8 text-center text-3xl md:mt-0">ABOUT US</h2>
+            <div className="flex w-full flex-col items-center lg:w-[37.5%]">
+              <h2 className="mt-8 text-center text-3xl lg:mt-0">ABOUT US</h2>
               <p className="text-md mt-4 w-full px-4 text-justify md:text-xl">
                 Welcome to HYPE, the epicenter of streetwear greatness.
                 Established in May 2023 in San Diego, California, we specialize

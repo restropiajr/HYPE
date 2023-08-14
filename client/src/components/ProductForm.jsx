@@ -15,7 +15,7 @@ export function ProductForm({ category, productId }) {
             <select
               required
               name="size"
-              className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600">
+              className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/3 md:hover:bg-red-600 lg:w-1/6">
               <option value="">--CHOOSE A SIZE--</option>
               <option value="EXTRA SMALL">EXTRA SMALL</option>
               <option value="SMALL">SMALL</option>
@@ -27,7 +27,7 @@ export function ProductForm({ category, productId }) {
             <select
               required
               name="size"
-              className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600">
+              className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/3 md:hover:bg-red-600 lg:w-1/6">
               <option value="">--CHOOSE A SIZE--</option>
               <option value="US(M) 8 / US(W) 9.5">US(M) 8 / US(W) 9.5</option>
               <option value="US(M) 9 / US(W) 10.5">US(M) 9 / US(W) 10.5</option>
@@ -45,7 +45,7 @@ export function ProductForm({ category, productId }) {
             <select
               required
               name="size"
-              className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600">
+              className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/3 md:hover:bg-red-600 lg:w-1/6">
               <option value="">--CHOOSE A SIZE--</option>
               <option value="ONE">ONE</option>
             </select>
@@ -54,7 +54,7 @@ export function ProductForm({ category, productId }) {
           <select
             required
             name="quantity"
-            className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600">
+            className="w-1/2 cursor-pointer rounded border-2 border-black text-center text-xs transition duration-200 ease-in-out md:w-1/3 md:hover:bg-red-600 lg:w-1/6">
             <option value="">--CHOOSE QUANTITY--</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -66,13 +66,13 @@ export function ProductForm({ category, productId }) {
             type="submit"
             className={` ${
               addToCartError ? 'mb-0' : 'mb-8'
-            } mt-4 w-1/2 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:w-1/6 md:hover:bg-red-600`}>
+            } mt-4 w-1/2 rounded border-2 border-black p-2 text-xl transition duration-200 ease-in-out md:w-1/3 md:hover:bg-red-600 lg:w-1/6`}>
             ADD TO CART
           </button>
         </form>
         {addToCartError && (
-          <div className="flex w-full items-center justify-center md:w-1/6">
-            <p className="mx-12 mb-8 mt-2 text-start text-xl text-red-600 md:mx-0">
+          <div className="flex w-full items-center justify-center md:w-1/2 lg:w-1/4">
+            <p className="mx-8 mb-8 mt-2 text-start text-xl text-red-600 md:mx-0">
               ERROR: {addToCartError.message}
             </p>
           </div>

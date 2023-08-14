@@ -11,7 +11,9 @@ export function MyCartList() {
     <div className="row-three flex flex-wrap">
       {cart.map((product) => {
         return (
-          <div key={product.cartedItemId} className="col flex w-full md:w-1/4">
+          <div
+            key={product.cartedItemId}
+            className="col flex w-full md:w-1/2 lg:w-1/4">
             <CartedProduct product={product} />
           </div>
         );
