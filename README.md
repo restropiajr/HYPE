@@ -32,6 +32,7 @@ As someone who's into streetwear collecting, I decided to channel that passion i
 - Argon2
 - JSON Web Token
 - Dotenv
+- Stripe
   
 ## Features
 
