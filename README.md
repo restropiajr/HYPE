@@ -10,7 +10,7 @@
 
 <div align="center">
   
-**An interactive e-commerce website that allows users to explore, purchase, and checkout a collection of streetwear products.**
+**An interactive e-commerce website that allow users to explore and checkout a collection of streetwear products.**
  
 </div>
 
