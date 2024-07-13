@@ -54,10 +54,6 @@ As someone who's into streetwear collecting, I decided to channel that passion i
 - User can view a checkout success page.
 - User can view contact information.
 - User can view a not found page.
-  
-## Link Demo
-
-Try the website at https://hype.restropiajr.com/
 
 ## Preview
 
